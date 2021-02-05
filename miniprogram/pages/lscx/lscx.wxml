@@ -1,0 +1,339 @@
+<!--pages/qljc/qljc.wxml-->
+
+<form bindsubmit="formsubmit" >
+<view class="title">
+   <label>桥梁检测查询页面</label>                    
+</view>
+<view class="divLine"></view>
+<view>
+  <picker  mode="date" value="{{jcrq}}" start="2020-04-01" end="2099-12-31" bindchange="bind_jcrq" bindinput='p_jcrq'>
+    <view  class="tte" >检测日期:</view>
+    <view class="content"> {{bridge.jcrq}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker mode="time" value="{{jcsj}}" start="06:00" end="22:01" bindchange="bind_jcsj">
+    <view  class="tte" >检测时间: </view>
+    <view  class="content">{{bridge.jcsj}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view >
+  <picker  mode="region" bindchange="bind_jcdq" value="{{region}}" custom-item="{{customItem}}">
+    <view >
+      <text class="tte">检测地区：</text> 
+      <view  class="content" >  {{bridge.jcdq[0]}}  {{bridge.jcdq[1]}}  {{bridge.jcdq[2]}} </view>
+    </view>
+  </picker>
+  
+</view>
+<view class="divLine"></view>
+
+<view>
+  <label class="tte" for="qlmc" style="float:left"  >桥梁名称:</label>
+  <text  class="content" name="qlmc"
+   bindinput="bind_qlmc" bindtap="g_qlmc">{{bridge.qlmc}} \r\n</text>
+   <modal id="modal_qlmc"hidden="{{hiddenmodalput_qlmc}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_qlmc"
+bindconfirm="confirm_qlmc">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue1}}"  bindinput="m_qlmc"/>
+</modal>
+</view>
+<view class="divLine"></view>
+
+<view>
+  <label  class="tte" for="szlm" style="float:left"  >所在路名:</label>
+  <text class="content" name="szlm" bindtap="g_szlm"
+    bindinput="bind_szlm"   value='{{inputInit}}' > {{bridge.szlm}} \r\n</text> 
+     <modal id="modal_szlm"hidden="{{hiddenmodalput_szlm}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_szlm"
+bindconfirm="confirm_szlm">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue2}}"  bindinput="m_szlm"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="kyhl" style="float:left"  >跨越（河流）: </label>
+  <text class="content" name="kyhl" bindtap="g_kyhl"
+   bindinput="bind_kyhl" >{{bridge.kyhl}} \r\n</text>
+   <modal id="modal_kyhl"hidden="{{hiddenmodalput_kyhl}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_kyhl"
+bindconfirm="confirm_kyhl">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue3}}"  bindinput="m_kyhl"/>
+</modal>
+</view>
+      <view class="divLine"></view>
+
+ <view class="tte"  >经纬度:</view>
+
+  <view class="content">
+  <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >经</text>
+   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >度:{{bridge.long}}</text>
+   <view>　</view>
+   <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 纬</text> 
+    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 度:{{bridge.lat}}  </text>
+   <view style="float:left" bindtap="g_map" class="delete {{editTrue?'isRuleShow':'isRuleHide'}}" >　重新获取 </view>
+
+   </view>
+ 
+
+<view class="divLine"></view>
+<view  style="display:flex; flex-direction: row;" >
+<view class="whole">
+  <view  class="photo">正面图片</view>
+  <view wx:if="{{isActive1}}"> 
+    <image class="photoframe" bindtap="g_chooseimage1" src="{{bridge.Czmt}}" width="50" mode="widthFix">
+    </image> 
+  </view>
+  <view wx:else> 
+    <image class="photoframe" bindtap="g_chooseimage1" src="{{bridge.zmt}}" width="50" mode="widthFix"> 
+    </image> </view>
+</view>
+<view class="divLine"></view>
+ <canvas canvas-id='attendCanvasId' class='myCanvas' style='width:800px;height:600px;position: fixed;top: -9999px;left: -9999px;'></canvas>
+<view class="whole" >
+  <view  class="photo">立面图片</view>
+  <view wx:if="{{isActive2}}">
+     <image class="photoframe" bindtap="g_chooseimage2" src="{{bridge.Clmt}}" width="50" mode="widthFix" ></image> </view>
+  <view wx:else> 
+    <image class="photoframe" bindtap="g_chooseimage2" src="{{bridge.lmt}}" width="50" mode="widthFix" >
+  </image> </view>
+</view>
+</view>
+<view class="divLine"></view>
+<!-- </view>
+ <button type="default" size="default" bindtap="bind_qjt">全景图</button>
+<view class="" wx:for="{{sources}}">
+  <image src="{{item}}" />
+</view> -->
+
+
+
+<view>
+  <picker bindchange="bind_hqxjcfx" value="{{index_hqxjcfx}}" range="{{arr_hqxjcfx}}">
+    <view class="tte">横桥向检测方向：</view>
+    <view class="content">{{bridge.hqxjcfx}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_sqxjcfx" value="{{index_sqxjcfx}}" range="{{arr_sqxjcfx}}">
+     <view class="tte">顺桥向检测方向：</view>
+     <view class="content"> {{bridge.sqxjcfx}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+
+<view>
+  <picker bindchange="bind_dldj" value="{{index_dldj}}" range="{{arr_dldj}}">
+     <view class="tte">道路等级：</view>
+     <view class="content">{{bridge.dldj}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_qmjg" value="{{index_qmjg}}" range="{{arr_qmjg}}">
+     <view class="tte">桥面结构:</view>
+     <view class="content">{{bridge.qmjg}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_ssfxs" value="0" range="{{arr_ssfxs}}">
+    <view class="tte">伸缩缝型式：</view>
+    <view class="content">{{bridge.ssfxs}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_zxjj" value="{{index_zxjj}}" range="{{arr_zxjj}}">
+    <view class="tte">正斜交角:</view>
+    <view class="content">{{bridge.zxjj}}</view>
+  </picker>
+</view>
+
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="qlks" style="float:left"  >请输入桥梁跨数:</label>
+  <text class="content" name="qlks" bindtap="g_qlks"
+   value='{{qlks}}' bindinput="bind_qlks">{{bridge.qlks}} \r\n</text>
+   <modal id="modal_qlks"hidden="{{hiddenmodalput_qlks}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_qlks"
+bindconfirm="confirm_qlks">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue4}}"  bindinput="m_qlks"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="kjzh" style="float:left"  >请输入跨径组合: </label>
+  <text class="content" name="kjzh"
+    bindinput="bind_kjzh" bindtap="g_kjzh" > {{bridge.kjzh}} \r\n</text>
+     <modal id="modal_kjzh"hidden="{{hiddenmodalput_kjzh}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_kjzh"
+bindconfirm="confirm_kjzh">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue5}}"  bindinput="m_kjzh"/>
+</modal>
+
+
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="hxbz" style="float:left"  >请输入横向布置:</label>
+  <text class="content" name="hxbz" bindtap="g_hxbz"
+    bindinput="bind_hxbz">{{bridge.hxbz}} \r\n</text>
+     <modal id="modal_hxbz"hidden="{{hiddenmodalput_hxbz}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_hxbz"
+bindconfirm="confirm_hxbz">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue6}}"  bindinput="m_hxbz"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="lgcc" style="float:left" >请输入栏杆尺寸:</label>
+  <text class="content" name="lgcc" bindtap="g_lgcc" 
+  bindinput="bind_lgcc">{{bridge.lgcc}} \r\n</text>
+   <modal id="modal_lgcc"hidden="{{hiddenmodalput_lgcc}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_lgcc"
+bindconfirm="confirm_lgcc">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue7}}"  bindinput="m_lgcc"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="lysgd" style="float:left"  >请输入路沿石高度: </label>
+  <text class="content" name="lysgd" bindtap="g_lysgd"
+   bindinput="bind_lysgd">{{bridge.lysgd}}\r\n</text>
+    <modal id="modal_lysgd"hidden="{{hiddenmodalput_lysgd}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_lysgd"
+bindconfirm="confirm_lysgd">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue8}}"  bindinput="m_lysgd"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="psg" >请输入排水口类型尺寸和个数字:</label>
+  <text class="content" name="psg" bindtap="g_psg" 
+    bindinput="bind_psg">{{bridge.psg}}\r\n</text>
+     <modal id="modal_psg"hidden="{{hiddenmodalput_psg}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_psg"
+bindconfirm="confirm_psg">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue9}}"  bindinput="m_psg"/>
+</modal>
+</view>
+<view class="divLine"></view>
+<view>
+  <label class="tte" for="dbcd" >请输入搭板长度: </label>
+  <text class="content"  name="dbcd" bindtap="g_dbcd"
+   bindinput="bind_dbcd" >{{bridge.dbcd}}\r\n</text>
+   </view>
+    <modal id="modal_dbcd"hidden="{{hiddenmodalput_dbcd}}"
+title="请输入修改内容"
+confirm-text="提交"
+cancel-text="取消"
+bindcancel="cancel_dbcd"
+bindconfirm="confirm_dbcd">
+<textarea class="content" placeholder="请输入内容..." placeholder-style="color:#d4d4d4;" value="{{modalValue10}}"  bindinput="m_dbcd"/>
+</modal>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_qtxs" value="{{index_qtxs}}" range="{{arr_qtxs}}">
+    <view class="tte">桥台型式:</view>
+    <view class="content"> {{bridge.qtxs}}</view>
+  </picker>
+</view>
+<view>
+  <picker mode="selector" bindchange="bind_qdxs" value="{{index_qdxs}}" range="{{arr_qdxs}}">
+     <view class="tte">桥墩型式:</view>
+     <view class="content">{{bridge.qdxs}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_jltx" value="{{index_jltx}}" range="{{arr_jltx}}">
+    <view class="tte">静力体系:</view>
+    <view class="content">{{bridge.jltx}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_hjmxs" value="{{index_hjmxs}}" range="{{arr_hjmxs}}">
+    <view class="tte">横截面型式:</view>
+    <view class="content">{{bridge.hjmxs}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_sgff" value="{{index_sgff}}" range="{{arr_sgff}}">
+    <view class="tte">施工方法:</view>
+    <view class="content">{{bridge.sgff}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_hxlx" value="{{index_hxlx}}" range="{{arr_hxlx}}">
+    <view class="tte">横向联系:</view>
+    <view class="content">{{bridge.hxlx}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_zzxs" value="{{index_zzxs}}" range="{{arr_zzxs}}">
+    <view class="tte">支座型式:</view>
+    <view class="content">{{bridge.zzxs}}</view>
+  </picker>
+</view>
+ <view class="button_bottom3"  bindtap="bind_ybzl" style=" background-color:rgb(9, 96, 230)">一般资料</view  >  
+
+ <view class="divLine"></view>
+ <view  class="button_bottom4"  bindtap="bind_sbjg" style=" background-color:rgb(9, 96, 230)" >上部结构</view >  
+
+ <view class="divLine"></view>
+  <view   class="button_bottom2"  bindtap="bind_xbjg" style=" background-color:rgb(9, 96, 230)"  >下部结构</view  >    
+ 
+  <view class="divLine"></view>
+    <view  class="button_bottom1"  bindtap="bind_qtnr" style=" background-color:rgb(9, 96, 230)"  >其他内容</view  >    
+    
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_clxs" value="{{clxs}}" range="{{arr_clxs}}">
+    <view class="tte">材料型式:</view>
+    <view class="content">{{bridge.clxs}}</view>
+  </picker>
+</view>
+<view class="divLine"></view>
+ <button  type="primary" bindtap="bind_amd" style="float:left" >提交</button>        
+ <button  type="primary" bindtap="bind_history">返回查询</button>
+  <button  type="primary" form-type="reset" style="float:left" bindtap="bind_rst">重置</button>
+ <button  type="primary" bindtap="bind_record">返回记录</button>
+
+<button  type="primary" style="float:left"  bindtap="bind_excel">输出为WORD</button> 
+<button  type="primary" bindtap="bind_delete">删除该条记录</button> 
+</form>

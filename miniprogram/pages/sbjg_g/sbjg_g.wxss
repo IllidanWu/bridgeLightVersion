@@ -1,0 +1,108 @@
+/* pages/qljc/qljc.wxss */
+.photo{display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size:large;
+  font-family:"微软雅黑";
+  font-weight:900;}
+.whole{height:400rpx;
+   width:50%}
+.photoframe{height:340rpx;
+       width:90%;
+       border:5rpx solid #eee;}
+.title{display:flex;
+   justify-content: left;
+   align-items: center;
+   font-weight:bold;
+   font-size:30px;}
+
+.tte{font-size:large;
+     width:100%;
+     font-style:normal;
+     font-family:"微软雅黑";
+     font-weight:900;
+  
+     
+}
+
+
+
+.content{
+   font-size:medium;width:90%;
+   border:5rpx solid #eee;
+   margin:10rpx;
+   height:60rpx;
+   display:flex;
+   align-items:center;
+   border-top-left-radius:5px;
+   border-top-right-radius:5px;
+   border-bottom-left-radius:5px;
+   border-bottom-right-radius:5px;
+
+ }
+
+.block_title{ height:50rpx;width:100%;}
+
+.block_1{height:20rpx;width:100%;}
+
+.block_2{height:40rpx;width:100%;}
+
+
+.isRuleShow {
+opacity: 1;
+}
+
+.isRuleHide {
+opacity: 0;
+}
+
+
+
+
+
+  
+
+   
+.bbc{width:8rpx}
+.buttonnp{color:rgb(0, 0, 0);}
+
+.button-container{
+   display:flex;
+   flex-direction:column;
+   flex-wrap:wrap;
+   align-items: center;
+   justify-content: center;
+   }
+.button-container.button{width:100%  !important;
+           height:50rpx;
+          }
+
+
+.button-containerw{
+            display:flex;
+            flex-direction:column;
+            flex-wrap:wrap;
+            align-items: center;
+            justify-content: center;
+            }
+.button-container.buttonw{border:1rpx solid rgb(56, 55, 55);
+   background: #15941b;
+                   }
+                   .button_bottom1{
+                     width:25%;
+                     color:white;
+                     position: fixed;
+                     bottom:0;
+                     display:flex;
+                     right:5px;
+                     border-radius: 5px
+                     }
+                     .button_bottom1{
+                        width:5%;
+                        color:white;
+                        position: fixed;
+                        display:flex;
+                        bottom:10rem;
+                        right:0px;
+                        border-radius: 5px
+                        }    

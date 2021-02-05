@@ -1,0 +1,234 @@
+<!--pages/qljc/qljc.wxml-->
+
+
+
+<view> 
+   <text class="title">桥梁检测记录页面</text> 
+   <text>　</text>                
+</view>
+
+<view class="divLine"></view>
+<view>
+
+  <view class="tte">检测日期:</view>
+  <picker  mode="date" value="{{jcrq}}" start="2020-04-01" end="2099-12-31" bindchange="bind_jcrq" bindinput='p_jcrq'>
+    <view class="content">{{bridgeInfo.jcrq}}</view>
+  </picker>
+ 
+</view>
+<view class="divLine"></view>
+
+<view>
+
+  <picker mode="time" value="{{jcsj}}" start="06:00" end="22:01" bindchange="bind_jcsj"> 
+    <view class="tte">检测时间:</view>
+    <view class="content" > {{bridgeInfo.jcsj}} </view>  
+  </picker>
+</view>
+
+<view class="divLine"></view>
+<view >
+  <picker mode="region" bindchange="bind_jcdq" value="{{bridgeInfo.jcdq}}" custom-item="{{customItem}}">
+     <view class="tte">检测地区：</view>
+      <view class="content" > {{bridgeInfo.jcdq[0]}}  {{bridgeInfo.jcdq[1]}}  {{bridgeInfo.jcdq[2]}} </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+
+<view>
+  <text  class="tte" for="qlmc">桥梁名称: </text>
+  <input class="content" name="qlmc" 
+   placeholder='{{bridgeInfo.qlmc}}'   bindinput='bind_qlmc'/> 
+</view>
+
+
+
+<view class="divLine"></view>
+<view>
+
+  <text  class="tte" for="szlm" >所在路名: </text>
+
+
+  <input class="content" name="szlm"
+   placeholder='{{bridgeInfo.szlm}}' bindinput="bind_szlm" />
+
+  
+
+</view>
+<view class="divLine"></view>
+<view>
+  
+  <text  class="tte" for="kyhl" >跨越（河流）: </text>
+  <input class="content" name="kyhl"
+   placeholder='{{bridgeInfo.kyhl}}' bindinput="bind_kyhl" />
+  
+</view>
+
+ <view class="divLine"></view>
+
+<view>
+ <view class="tte"  >经纬度:</view>
+  
+  <view class="content">
+  <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >经</text>
+   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >度:{{bridgeInfo.long}}</text>
+   <view style="float:left" bindtap="map"  class="delete {{editTrue?'isRuleShow':'isRuleHide'}}">　获取经纬度</view>
+   
+   <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 纬</text> 
+    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 度:{{bridgeInfo.lat}} </text>
+
+   </view>
+  </view>
+
+<view class="divLine"></view>
+<view  style="display:flex; flex-direction: row;" >
+<view class="whole">
+  <view  class="photo">正面图片:</view>
+   <image class="photoframe" bindtap="chooseimage1"  src="{{bridgeInfo.zmt}}"   ></image>
+   <canvas  canvas-id='attendCanvasId' class='myCanvas'style='width:800px;height:600px;position: fixed;top: -9999px;left: -9999px;'></canvas>
+</view>
+
+
+
+
+<view class="divLine"></view>
+
+<view class="whole" >
+<view class="photo">立面图片:</view>
+   <image class="photoframe" bindtap="chooseimage2" src="{{bridgeInfo.lmt}}" ></image>
+<canvas canvas-id='attendCanvasId' class='myCanvas' style='width:800px;height:600px;position: fixed;top: -9999px;left: -9999px;'></canvas>
+</view>
+</view>
+
+
+ <view class="button_bottom3"  bindtap="bind_ybzl" style=" background-color:rgb(9, 96, 230)">一般资料</view  >  
+
+ <view class="divLine"></view>
+ <view  class="button_bottom4"  bindtap="bind_sbjg" style=" background-color:rgb(9, 96, 230)" >上部结构</view >  
+
+ <view class="divLine"></view>
+  <view   class="button_bottom2"  bindtap="bind_xbjg" style=" background-color:rgb(9, 96, 230)"  >下部结构</view  >    
+ 
+  <view class="divLine"></view>
+    <view  class="button_bottom1"  bindtap="bind_qtnr" style=" background-color:rgb(9, 96, 230)"  >其他内容</view  >    
+    <view class="divLine"></view>
+
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_hqxjcfx" value="{{index_hqxjcfx}}" range="{{arr_hqxjcfx}}">
+    <view >
+    <text class="tte" >横桥向检测方向：</text>
+ 
+    <view class="content">{{bridgeInfo.hqxjcfx}} </view>
+    </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_sqxjcfx" value="{{index_sqxjcfx}}" range="{{arr_sqxjcfx}}">
+    <view >
+     <text class="tte" >顺桥向检测方向：</text>
+     <view class="content">{{bridgeInfo.sqxjcfx}}</view>
+     </view>
+  </picker>
+</view>
+
+
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_qmjg" value="{{index_qmjg}}" range="{{arr_qmjg}}">
+    <view >
+    <text class="tte" >桥面结构:</text>
+    <view class="content">{{bridgeInfo.qmjg}}</view>
+    </view>
+  </picker>
+</view>
+
+
+
+
+<view class="divLine"></view>
+<view>
+  <label   class="tte">请输入横向布置: </label>
+  <input class="content" name="hxbz"
+   placeholder='{{bridgeInfo.hxbz}}'  bindinput="bind_hxbz"/>
+</view>
+<view class="divLine"></view>
+<view>
+  <label  class="tte">请输入栏杆尺寸: </label>
+  <input class="content" name="lgcc"
+   placeholder='{{bridgeInfo.lgcc}}' bindinput="bind_lgcc"/>
+</view>
+<view class="divLine"></view>
+<view>
+  <label  class="tte">请输入路沿石高度: </label>
+  <input class="content" name="lysgd"
+   placeholder='{{bridgeInfo.lysgd}}' bindinput="bind_lysgd"/>
+</view>
+<view class="divLine"></view>
+<view>
+  <label  class="tte" >请输入排水口类型尺寸和个数: </label>
+  <input class="content" name="psg"
+   placeholder='{{bridgeInfo.psg}}' bindinput="bind_psg" />
+</view>
+<view class="divLine"></view>
+<view>
+  <label  class="tte">请输入搭板长度: </label>
+  <input class="content" name="dbcd"
+   placeholder='{{bridgeInfo.dbcd}}' bindinput="bind_dbcd" />
+   </view>
+
+
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_jltx" value="{{index_jltx}}" range="{{arr_jltx}}">
+    <view >
+     <text class="tte">静力体系:</text>
+     <view class="content">{{bridgeInfo.jltx}}</view>
+     </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_hjmxs" value="{{index_hjmxs}}" range="{{arr_hjmxs}}">
+    <view >
+     <text class="tte">横截面型式:</text>
+     <view class="content">{{bridgeInfo.hjmxs}}</view>
+     </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_sgff" value="{{index_sgff}}" range="{{arr_sgff}}">
+    <view>
+     <text class="tte">施工方法:</text>
+     <view class="content">{{bridgeInfo.sgff}}</view>
+     </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_hxlx" value="{{index_hxlx}}" range="{{arr_hxlx}}">
+    <view >
+     <text class="tte">横向联系:</text>
+     <view class="content" >{{bridgeInfo.hxlx}}</view>
+     </view>
+  </picker>
+</view>
+
+<view class="divLine"></view>
+<view>
+  <picker bindchange="bind_clxs" value="{{clxs}}" range="{{arr_clxs}}">
+    <view>
+     <text class="tte">材料型式:</text>
+     <view class="content">{{bridgeInfo.clxs}}</view>
+     </view>
+  </picker>
+</view>
+<view class="divLine"></view>
+
+ <view class="button-container">
+ <button  class="button_end" bindtap="bind_amd" style="float:left" >提交</button>        
+<button class="button_end" style="float:left" formType="reset" bindtap="bind_rst" >重置</button>
+ <button  class="button_end" style="float:left" bindtap="bind_history" >历史记录</button>
+</view>
