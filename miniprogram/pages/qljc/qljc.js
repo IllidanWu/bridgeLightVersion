@@ -80,14 +80,12 @@ Page({
       zzj:'',
       yhlb:'',
       yhdj:'',
-     // dldj:'', //
+
       jglx:'',
       sjhz:'',
       xzbz:'',
       kzld:'',
-    //  zxjj:'',//
-   //   qlks:'',//
-    //  kjzh:'',//
+
       qmmj:'',
       qlzc:'',
       qlzk:'',
@@ -124,14 +122,12 @@ Page({
       zzj:'',
       yhlb:'',
       yhdj:'',
-     // dldj:'', //
+
       jglx:'',
       sjhz:'',
       xzbz:'',
       kzld:'',
-    //  zxjj:'',//
-   //   qlks:'',//
-    //  kjzh:'',//
+
       qmmj:'',
       qlzc:'',
       qlzk:'',
@@ -141,7 +137,6 @@ Page({
       zgsw:'',
       csw:'',
 
-      //sbjg//
       zlxs: '',
       zlcc:'',
       zlsl:'',
@@ -153,13 +148,11 @@ Page({
       zssl:'',
       qljg:'',
       qmpzhd:'',
-     // ssfxs:'',
       ssfsl:'',
       zqzp:'',
       zqhp:'',
       yqzp:'',
       yqhp:'',
-      //
       qdxs:'',
      qdsl:'',
      glcc:'',
@@ -180,7 +173,6 @@ Page({
      yqcd:'',
      szlm:'',
      kyhl:'',
-//
 gldw:'',
 yhdw: '',
 jsdw:'',
@@ -191,14 +183,10 @@ jzny:'',
 zzj:'',
 yhlb:'',
 yhdj:'',
-// dldj:'', //
 jglx:'',
 sjhz:'',
 xzbz:'',
 kzld:'',
-//  zxjj:'',//
-//   qlks:'',//
-//  kjzh:'',//
 qmmj:'',
 qlzc:'',
 qlzk:'',
@@ -233,16 +221,13 @@ csw:'',
     zlxs: "请输入主梁型式",
     qdsl: "请输入桥墩数量",
     //input
-    // Czmt:"请输入跨越河流",
-    // Clmt:"请输入跨越河流",
+
     qlks: "请输入桥梁跨数",
     kjzh: "请输入跨径组合",
     hxbz: "请输入横向布置",
     lgcc: "请输入栏杆尺寸",
     lysgd: "请输入路沿石高度",
     dbcd: "请输入搭板长度",
-
-    
     gldw:"请输入管理单位",
     yhdw: "请输入养护单位",
     sjdw:"请输入设计单位",
@@ -253,14 +238,10 @@ csw:'',
     zzj:"请输入总造价",
     yhlb:"请输入养护类别",
     yhdj:"请输入养护等级",
-   // dldj:"请输入跨越河流", //
     jglx:"请输入结构类型",
     sjhz:"请输入设计荷载",
     xzbz:"请输入限载标准",
     kzld:"请输入抗震烈度",
-  //  zxjj:'',//
- //   qlks:'',//
-  //  kjzh:'',//
     qmmj:"请输入桥面面积",
     qlzc:"请输入桥梁总长",
     qlzk:"请输入桥梁总宽",
@@ -478,56 +459,10 @@ csw:'',
 
      
 
-  bind_jcrq:function(e){
-    this.setData({    
-      'bridgeInfo.jcrq': e.detail.value,  
-    })  
-  },
-
-
-
-bind_jcsj:function(e){
-  this.setData({
-    'bridgeInfo.jcsj': e.detail.value,
-  })
-  
-},
-
-bind_jcdq:function(e){
-  this.setData({
-    'bridgeInfo.jcdq': e.detail.value,
-  })
-},
 
 
 
 
-
-bind_hqxjcfx: function(e) {
-  
-   this.index_hqxjcfx=e.detail.value
-  this.setData({
-    index_hqxjcfx: this.index_hqxjcfx,
-    'bridgeActive.hqxjcfx': false
-  })
-  this.setData({
-    'bridgeInfo.hqxjcfx': this.data.arr_hqxjcfx[this.data.index_hqxjcfx],
-  })
-} ,
-
-bind_sqxjcfx:function(e){
-   this.index_sqxjcfx=e.detail.value
-   this.setData(
-     {
-       index_sqxjcfx:this.index_sqxjcfx,
-       'bridgeActive.sqxjcfx': false
-       
-     }
-   )
-  this.setData({
-    'bridgeInfo.sqxjcfx': this.data.arr_sqxjcfx[this.data.index_sqxjcfx],
-  })
-},
 
 
 bind_qlmc:function(e){
@@ -548,144 +483,6 @@ bind_qlmc:function(e){
   }
 },
 
-// bind_szlm:function(e){
-//   // this.setData({
-//   //   'bridgeInfo.szlm': e.detail.value,
-//   // })
-
-
-//   this.setData({
-//     'bridgeInfo.szlm': e.detail.value,
-//     'bridgeReveal.szlm': e.detail.value
-//   })
-// },
-
-bind_szlm:function(e){
-   
-  if (e.detail.value==='')
-  {
-    this.setData({
-     'bridgeReveal.szlm':"请输入所在路名",   
-    //  'bridgeActive.szlm': true
-    })
-  }
-  else {
-  this.setData({
-    // isActive_qlmc:false,
-    'bridgeInfo.szlm': e.detail.value,
-    'bridgeReveal.szlm': e.detail.value,
-  //  'bridgeActive.szlm': false
-  })
-  }
-
-},
-bind_kyhl:function(e){
-  if (e.detail.value==='')
-  {
-    this.setData({
-     'bridgeReveal.kyhl':"请输入跨越河流",   
-    })
-  }
-  else {
-  this.setData({
-    'bridgeInfo.kyhl': e.detail.value,
-    'bridgeReveal.kyhl': e.detail.value,
-  })
-  }
-},
-
-
-bind_hxbz:function(e){
-  if (e.detail.value==='')
-  {
-    this.setData({
-     'bridgeReveal.hxbz':"请输入横向布置",   
-    })
-  }
-  else {
-  this.setData({
-    'bridgeInfo.hxbz': e.detail.value,
-    'bridgeReveal.hxbz': e.detail.value,
-  })
-  }
-},
-bind_lgcc:function(e){
-  // this.setData({
-  //   'bridgeInfo.lgcc': e.detail.value,
-  // })
-  if (e.detail.value==='')
-  {
-    this.setData({
-      'bridgeReveal.lgcc':"请输入栏杆尺寸", 
-    })
-  }
-  else{
-  this.setData({
-    'bridgeInfo.lgcc': e.detail.value,
-    'bridgeReveal.lgcc': e.detail.value
-  })
-}
-
-},
-bind_lysgd:function(e){
-  if (e.detail.value==='')
-    {
-      this.setData({
-       'bridgeReveal.lysgd':"请输入路沿石高度",   
-      })
-    }
-    else {
-    this.setData({
-      'bridgeInfo.lysgd': e.detail.value,
-      'bridgeReveal.lysgd': e.detail.value,
-    })
-    }
-
-},
-bind_psg:function(e){
-  if (e.detail.value==='')
-  {
-    this.setData({
-      'bridgeReveal.psg':"请输入排水口尺寸和个数",
-    })
-  }
-  else{
-  this.setData({
-    'bridgeInfo.psg': e.detail.value,
-    'bridgeReveal.psg': e.detail.value
-  })
-}
-
-},
-bind_dbcd:function(e){
-  if (e.detail.value==='')
-  {
-    this.setData({
-      'bridgeReveal.dbcd':"请输入搭板长度",
-    })
-  }
-  else{
-  this.setData({
-    'bridgeInfo.dbcd': e.detail.value,
-    'bridgeReveal.dbcd': e.detail.value
-  })
-}
-},
-
-
-
-bind_qmjg:function(e){
-  this.index_qmjg=e.detail.value
-  this.setData(
-    {
-      index_qmjg:this.index_qmjg,
-      'bridgeActive.qmjg': false
-    }
-  )
-  this.setData({
-    'bridgeInfo.qmjg': this.data.arr_qmjg[this.data.index_qmjg],
-  })
-},
 
 
 
@@ -696,72 +493,6 @@ bind_qmjg:function(e){
 
 
 
-bind_jltx:function(e){
-     this.index_jltx=e.detail.value
-     this.setData(
-       {
-         index_jltx:this.index_jltx,
-         'bridgeActive.jltx': false
-       }
-     )
-  this.setData({
-    'bridgeInfo.jltx': this.data.arr_jltx[this.data.index_jltx],
-  })
-},
-
-bind_hjmxs:function(e){
-    this.index_hjmxs=e.detail.value
-    this.setData(
-      {
-        index_hjmxs:this.index_hjmxs,
-        'bridgeActive.hjmxs': false
-      }
-    )
-  this.setData({
-    'bridgeInfo.hjmxs': this.data.arr_hjmxs[this.data.index_hjmxs],
-  })
-},
-
-bind_sgff:function(e){
-  this.index_sgff=e.detail.value
-  this.setData(
-    {
-      index_sgff:this.index_sgff,
-      'bridgeActive.sgff': false
-    }
-  )
-  this.setData({
-    'bridgeInfo.sgff': this.data.arr_sgff[this.data.index_sgff],
-  })
-},
-
-bind_hxlx:function(e){
-  this.index_hxlx=e.detail.value
-   this.setData(
-     {
-       index_hxlx:this.index_hxlx,
-       'bridgeActive.hxlx': false
-     }
-   )
-  this.setData({
-    'bridgeInfo.hxlx': this.data.arr_hxlx[this.data.index_hxlx],
-  })
-},
-
-
-
-bind_clxs:function(e){
-  this.index_clxs=e.detail.value
-  this.setData(
-    {
-      index_clxs:this.index_clxs,
-      'bridgeActive.clxs': false
-    }
-  )
-  this.setData({
-    'bridgeInfo.clxs': this.data.arr_clxs[this.data.index_clxs],
-  })
-},
 
 
 bind_rst: function(e) {
@@ -951,16 +682,7 @@ bind_rst: function(e) {
     console.log(bridgeActive)
     console.log(bridgeReveal)
    }
-//    var latitude=this.data.bridgeInfo.lat
-//    var longitude=this.data.bridgieInfo.long
-//    console.log(latitude)
-//    console.log(longitude)
-//    console.log(app.globalData.count)
-//    console.log(that.data.editTrue)
-// that.setData({
-//   lat:latitude.toFixed(5),           //获取纬度数据
-//   long:longitude.toFixed(5)         //获取经度数据
-// })
+
    var items = JSON.parse(this.options.items);
    that.setData({
     bridgeInfo:items
@@ -1047,37 +769,6 @@ this.setData({
   },
 
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-
-  onShow: function () {
  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
 

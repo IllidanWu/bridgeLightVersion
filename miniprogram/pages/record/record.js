@@ -151,6 +151,10 @@ console.log('error')
       
       },
       bind_delete: function(e){
+        var that=this
+        console.log(that.data.bridge);
+        var bridge=that.data.bridge
+         var _id=that.data._id
         wx.showModal  ({
           title: '请确认删除该条记录',
           content: '是否删除?',
@@ -165,9 +169,7 @@ console.log('error')
             duration:2000
           })
         })
-        var that=this
-        var bridge=that.data.bridge
-         var _id=that.data._id
+       console.log(bridge);
         //const _id=wx.getStorageSync('bridgeListID')
         wx.cloud.deleteFile({
           fileList: [bridge.Cwordid,bridge.Clmt,bridge.Czmt,bridge.Cqrcode],

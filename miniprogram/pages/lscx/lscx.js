@@ -299,59 +299,6 @@ console.log('error')
 
 
 
-bind_jcsj:function(e){
- 
-  this.setData({
-    [`bridge.jcsj`]: e.detail.value,
-  })
-  
-  
-},
-
-bind_jcdq:function(e){
- 
-  this.setData({
-    region: e.detail.value
-    
-  })
-  console.log(e.detail.value)
-  this.setData( {
-      [`bridge.jcdq`]: this.data.region
-    }
-  )
-},
-
-
-
-
-
-bind_hqxjcfx: function(e) {
- 
-   this.index_hqxjcfx=e.detail.value
-  this.setData({
-    index_hqxjcfx: this.index_hqxjcfx
-  })
-  this.setData({
-    [`bridge.hqxjcfx`]: this.data.arr_hqxjcfx[this.data.index_hqxjcfx],
-  })
-} ,
-bind_sqxjcfx:function(e){
-  
-   this.index_sqxjcfx=e.detail.value
-   this.setData(
-     {
-       index_sqxjcfx:this.index_sqxjcfx
-       
-     }
-   )
-  this.setData({
-    [`bridge.sqxjcfx`]: this.data.arr_sqxjcfx[this.data.index_sqxjcfx],
-  })
-},
-
-
-
- 
  
 g_qlmc: function() {
   this.setData({
@@ -382,434 +329,9 @@ cancel_qlmc: function() {
   })
 },
 
-g_szlm: function() {
-  this.setData({
-      hiddenmodalput_szlm: !this.data.hiddenmodalput_szlm
-  })
-},
-confirm_szlm: function() {
- 
-  this.setData({
-      hiddenmodalput_szlm: true,
-      [`bridge.szlm`]:this.data.bridgeroad
-  })
-  console.log (this.data.bridgeroad)
-  console.log (this.data.bridgeInfo)
-},
-m_szlm:function(e){
-  
-  this.setData(
-    {
-        'bridgeroad': e.detail.value,
-    }
-  )
-  console.log(bridgeroad)
-},
-
-cancel_szlm: function() {
-  this.setData({
-      hiddenmodalput_szlm: true
-  })
-},
 
 
 
-
-
-
-bind_kyhl:function(e){
-  this.setData({
-    'bridgeInfo.kyhl': e.detail.value,
-  })
-
-},
-
-g_kyhl: function() {
-  this.setData({
-      hiddenmodalput_kyhl: !this.data.hiddenmodalput_kyhl
-  })
-},
-confirm_kyhl: function() {
- 
-  this.setData({
-      hiddenmodalput_kyhl: true,
-      [`bridge.kyhl`]:this.data.bridgeriver
-  })
- 
-},
-m_kyhl:function(e){
-  this.setData(
-    {
-        'bridgeriver': e.detail.value,
-    }
-  )
-
-},
-
-cancel_kyhl: function() {
-  this.setData({
-      hiddenmodalput_kyhl: true
-  })
-},
-
-
-g_qlks: function() {
-  this.setData({
-      hiddenmodalput_qlks: !this.data.hiddenmodalput_qlks
-  })
-},
-confirm_qlks: function() {
- 
-  this.setData({
-      hiddenmodalput_qlks: true,
-      [`bridge.qlks`]:this.data.bridgeqlks
-  })
- 
-},
-m_qlks:function(e){
-  this.setData(
-    {
-        'bridgeqlks': e.detail.value,
-    }
-  )
-
-},
-cancel_qlks: function() {
-  this.setData({
-      hiddenmodalput_qlks: true
-  })
-},
-g_kjzh: function() {
-  this.setData({
-      hiddenmodalput_kjzh: !this.data.hiddenmodalput_kjzh
-  })
-},
-confirm_kjzh: function() {
- 
-  this.setData({
-      hiddenmodalput_kjzh: true,
-      [`bridge.kjzh`]:this.data.bridgekjzh
-  })
- 
-},
-m_kjzh:function(e){
-  this.setData(
-    {
-        'bridgekjzh': e.detail.value,
-    }
-  )
-
-},
-cancel_kjzh: function() {
-  this.setData({
-      hiddenmodalput_kjzh: true
-  })
-},
-
-
-g_hxbz: function() {
-  this.setData({
-      hiddenmodalput_hxbz: !this.data.hiddenmodalput_hxbz
-  })
-},
-confirm_hxbz: function() {
- 
-  this.setData({
-      hiddenmodalput_hxbz: true,
-      [`bridge.hxbz`]:this.data.bridgehxbz
-  })
- 
-},
-m_hxbz:function(e){
-  this.setData(
-    {
-        'bridgehxbz': e.detail.value,
-    }
-  )
-
-},
-cancel_hxbz: function() {
-  this.setData({
-      hiddenmodalput_hxbz: true
-  })
-},
-
-
-
-
-
-g_lgcc: function() {
-  this.setData({
-      hiddenmodalput_lgcc: !this.data.hiddenmodalput_lgcc
-  })
-},
-confirm_lgcc: function() {
- 
-  this.setData({
-      hiddenmodalput_lgcc: true,
-      [`bridge.lgcc`]:this.data.bridgelgcc
-  })
- 
-},
-m_lgcc:function(e){
-  this.setData(
-    {
-        'bridgelgcc': e.detail.value,
-    }
-  )
-
-},
-cancel_lgcc: function() {
-  this.setData({
-      hiddenmodalput_lgcc: true
-  })
-},
-
-
-g_lysgd: function() {
-  this.setData({
-      hiddenmodalput_lysgd: !this.data.hiddenmodalput_lysgd
-  })
-},
-confirm_lysgd: function() {
- 
-  this.setData({
-      hiddenmodalput_lysgd: true,
-      [`bridge.lysgd`]:this.data.bridgelysgd
-  })
- 
-},
-m_lysgd:function(e){
-  this.setData(
-    {
-        'bridgelysgd': e.detail.value,
-    }
-  )
-
-},
-cancel_lysgd: function() {
-  this.setData({
-      hiddenmodalput_lysgd: true
-  })
-},
-
-
-
-g_psg: function() {
-  this.setData({
-      hiddenmodalput_psg: !this.data.hiddenmodalput_psg
-  })
-},
-confirm_psg: function() {
- 
-  this.setData({
-      hiddenmodalput_psg: true,
-      [`bridge.psg`]:this.data.bridgepsg
-  })
- 
-},
-m_psg:function(e){
-  this.setData(
-    {
-        'bridgepsg': e.detail.value,
-    }
-  )
-
-},
-cancel_psg: function() {
-  this.setData({
-      hiddenmodalput_psg: true
-  })
-},
-
-
-
-g_dbcd: function() {
-  this.setData({
-      hiddenmodalput_dbcd: !this.data.hiddenmodalput_dbcd
-  })
-},
-confirm_dbcd: function() {
- 
-  this.setData({
-      hiddenmodalput_dbcd: true,
-      [`bridge.dbcd`]:this.data.bridgedbcd
-  })
- 
-},
-m_dbcd:function(e){
-  this.setData(
-    {
-        'bridgedbcd': e.detail.value,
-    }
-  )
-
-},
-cancel_dbcd: function() {
-  this.setData({
-      hiddenmodalput_dbcd: true
-  })
-},
-
-
-bind_dldj:function(e){
- 
-  this.index_dldj=e.detail.value
-  this.setData(
-    {
-      index_dldj:this.index_dldj
-    }
-  )
-  this.setData({
-    [`bridge.dldj`]: this.data.arr_dldj[this.data.index_dldj],
-  })
-},
-
-bind_qmjg:function(e){
- 
-  this.index_qmjg=e.detail.value
-  this.setData(
-    {
-      index_qmjg:this.index_qmjg
-    }
-  )
-  this.setData({
-    [`bridge.qmjg`]: this.data.arr_qmjg[this.data.index_qmjg],
-  })
-},
-
-bind_ssfxs:function(e){
- 
-   this.index_ssfxs=e.detail.value
-   this.setData(
-     {
-       index_ssfxs:this.index_ssfxs
-     }
-   )
-  this.setData({
-    [`bridge.ssfxs`]: this.data.arr_ssfxs[this.data.index_ssfxs],
-  })
-},
-
-bind_zxjj:function(e){
- 
-   this.index_zxjj=e.detail.value
-   this.setData(
-     {
-       index_zxjj:this.index_zxjj
-     }
-   )
-  this.setData({
-    [`bridge.zxjj`]: this.data.arr_zxjj[this.data.index_zxjj],
-  })
-},
-
-
-bind_qtxs:function(e){
- 
-  this.index_qtxs=e.detail.value
-  
-  this.setData(
-    {
-      index_qtxs:this.index_qtxs
-    }
-  )
-  this.setData({
-    [`bridge.qtxs`]: this.data.arr_qtxs[this.data.index_qtxs],
-    
-  })
-},
-
-bind_qdxs:function(e){
- 
-  this.index_qdxs=e.detail.value
-  this.setData(
-    {
-      index_qdxs:this.index_qdxs
-    }
-  )
-  this.setData({
-    [`bridge.qdxs`]: this.data.arr_qdxs[this.data.index_qdxs],
-  })
-},
-
-bind_jltx:function(e){
- 
-     this.index_jltx=e.detail.value
-     this.setData(
-       {
-         index_jltx:this.index_jltx
-       }
-     )
-  this.setData({
-    [`bridge.jltx`]: this.data.arr_jltx[this.data.index_jltx],
-  })
-},
-
-bind_hjmxs:function(e){
- 
-    this.index_hjmxs=e.detail.value
-    this.setData(
-      {
-        index_hjmxs:this.index_hjmxs
-      }
-    )
-  this.setData({
-    [`bridge.hjmxs`]: this.data.arr_hjmxs[this.data.index_hjmxs],
-  })
-},
-
-bind_sgff:function(e){
- 
-  this.index_sgff=e.detail.value
-  this.setData(
-    {
-      index_sgff:this.index_sgff
-    }
-  )
-  this.setData({
-    [`bridge.sgff`]: this.data.arr_sgff[this.data.index_sgff],
-  })
-},
-
-bind_hxlx:function(e){
- 
-   this.index_hxlx=e.detail.value
-   this.setData(
-     {
-       index_hxlx:this.index_hxlx
-     }
-   )
-  this.setData({
-    [`bridge.hxlx`]: this.data.arr_hxlx[this.data.index_hxlx],
-  })
-},
-
-bind_zzxs:function(e){
- 
-  this.index_zzxs=e.detail.value
-  this.setData(
-    {
-      index_zzxs:this.index_zzxs
-    }
-  )
-  this.setData({
-    [`bridge.zzxs`]: this.data.arr_zzxs[this.data.index_zzxs],
-  })
-},
-
-bind_clxs:function(e){
- 
-  this.index_clxs=e.detail.value
-  this.setData(
-    {
-      index_clxs:this.index_clxs
-    }
-  )
-  this.setData({
-    [`bridge.clxs`]: this.data.arr_clxs[this.data.index_clxs],
-  })
-},
 
 
 
@@ -826,13 +348,10 @@ bind_amd:  async function(e) {
    var bridgeADDR=that.data.bridge
    console.log(bridgeADDR.zmt)
    console.log(bridgeADDR.lmt)
-  //  await this.uploadPhotoToDatabase1(bridgeADDR.zmt),
-  //  await this.uploadPhotoToDatabase2(bridgeADDR.lmt)
 
   if(isActive1!=1||isActive2!=1)
   {
     console.log('isActive=1')
-   // saveBridgeList(bridgeInfo);
    wx.showModal  ({
     title: '请确认修改',
     content: '是否修改?',
@@ -993,12 +512,7 @@ qdbg: that.data.bridge.qdbg,
         wx.showLoading({
           title:"正在上传......",
         })
-    //     wx.cloud.deleteFile({
-    //       fileList: [OClmt,OCzmt],
-    //    }).then(res=>{
-    // //  that.uploadPhotoToDatabase1(bridgeADDR.zmt).then(res=>{
-    // //   that.uploadPhotoToDatabase2(bridgeADDR.lmt).then(res=>{
-    // //     console.log(_id)
+
         bridgeListCollection.doc(_id).update(
           {
       
@@ -1122,8 +636,7 @@ zzxs: that.data.bridge.zzxs,
               icon:"none",
               duration:2000
             })
-      //     })
-      // })
+
      }),
        console.log('AMD')
       //  }) 
@@ -1164,6 +677,9 @@ zzxs: that.data.bridge.zzxs,
 
   },
   bind_delete: function(e){
+    var that=this
+    var bridge=that.data.bridge
+     var _id=that.data._id
     wx.showModal  ({
       title: '请确删除该条记录',
       content: '是否删除?',
@@ -1178,9 +694,7 @@ zzxs: that.data.bridge.zzxs,
         duration:2000
       })
     })
-    var that=this
-    var bridge=that.data.bridge
-     var _id=that.data._id
+
     //const _id=wx.getStorageSync('bridgeListID')
     wx.cloud.deleteFile({
       fileList: [bridge.Cwordid,bridge.Clmt,bridge.Czmt,bridge.Cqrcode],
@@ -1310,144 +824,10 @@ zzxs: that.data.bridge.zzxs,
           duration:2000
         })
       }).catch(err=>{
-          // wx.showToast({
-          //   title:"上传失败，请检查网络！",
-          //   icon:"none",
-          //   duration:2000
-          // })
+   
         })
         },
 
-// bind_word:  function(event){
-//   wx.showLoading({
-//     title:"正在生成Word......",
-//   }).catch(err=>{
-//     wx.showToast({
-//       title:"生成失败！",
-//       icon:"none",
-//       duration:2000
-//     })
-//   })
-//   var that=this
-//   //const _id=wx.getStorageSync('bridgeListID')  
-//   var _id=that.data._id
-//   var that = this
-//   var bridge=that.data.bridge
-//   var fileID
-//   console.log(bridge)
-//           wx.cloud.callFunction({
-//              name:'wordGen',
-//              data: bridge ,
-//             success:function(res){
-//               console.log(res)
-//               console.log(res.result)
-//               fileID=res.result
-//               console.log(fileID)
-//               wx.cloud.downloadFile({
-//                 fileID: fileID
-//               }).then(res => {
-//                 console.log(res)
-//                     wx.openDocument({
-//                       filePath: res.tempFilePath,
-//                       showMenu: true,
-//                       success: function (res) {
-//                         console.log('打开文档成功')
-//                       }
-//                     })
-//                   }).then(res => {
-//                     that.setData({
-//                       'bridge.Cwordid': fileID,
-//                     })   
-//                     bridgeListCollection.doc(_id).update(
-//                       {
-//                         data:{ 
-//                           Cwordid:fileID
-//                         }
-//                       })
-                      
-//                       })
-//                       wx.hideLoading()
-//                       wx.showToast({
-//                         title:"Word生成成功！",
-//                         duration:2000
-//                       }).catch(err=>{
-//                       wx.showToast({
-//                         title:"Word生成失败，请检查网络！",
-//                         icon:"none",
-//                         duration:2000
-//                       })
-//                     })
-//                 },   
-               
-//                 fail: console.error
-//               })
-    
-//     },
-
-//   bind_record: function (e){
-//     wx.showLoading({
-//       title:"正在生成桥梁二维码......",
-//     }).catch(err=>{
-//       wx.showToast({    
-//         title:"生成失败！",
-//         icon:"none",
-//         duration:2000
-//       })
-//     })
-//     var that=this
-//     console.log('do?')
-// var _id=that.data._id
-//   console.log(_id)
-//   var that = this
-//   var bridge=that.data.bridge
-//   var fileID
-//   console.log('do?')
-//   wx.cloud.callFunction({
-//     name: 'qrCode',
-//     data:{
-//       page: 'pages/Qrcode/Qrcode',
-//       scene: _id,
-//       qlmc: bridge.qlmc
-//     },
-//     success:function(res){
-//       fileID=res.result
-//       console.log(fileID)
-//       wx.cloud.downloadFile({
-//         fileID: fileID
-//       }).then(res => {
-//           wx.previewImage({
-//             urls: [res.tempFilePath]
-//           })
-//       }).then(res => {
-//         that.setData({
-//           'bridge.Cqrcode': fileID,
-//         })   
-//         bridgeListCollection.doc(_id).update(
-//           {
-//             data:{ 
-//               Cqrcode:fileID
-//             }
-//           })  
-//           wx.hideLoading()
-//           wx.showToast({
-//             title:"二维码生成成功！",
-//             duration:2000
-//           }).catch(err=>{
-//           wx.showToast({
-//             title:"二维码生成失败，请检查网络！",
-//             icon:"none",
-//             duration:2000
-//           })
-//         })
-//           })
-//     }
-//   }).then(res=>{
-//     console.log('成功',res)
-
-//   }).catch(res=>{
-//     console.log('失败',res)
-//   })
-// }
 })
 
 
