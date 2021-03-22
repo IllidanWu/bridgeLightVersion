@@ -1,11 +1,26 @@
-const { default: got } = require('got/dist/source')
+// const { default: got } = require('got/dist/source')
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
 
+  env: "qljc-0b2vv",
+
+
+})
+
+const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
+  // collection 上的 get 方法会返回一个 Promise，因此云函数会在数据库异步取完数据后返回结果
+  return db.collection('bridgeList').get()
+}
+
+  
+  // ...
+  // return {
+  //   sum: event.a + event.b
+  // }
   // let getResponse = await got ('httpbin.org/get')
 
   // let postResponse = await got ('httpbin.org/post',{
@@ -25,14 +40,9 @@ exports.main = async (event, context) => {
   // let getResponse = await got('httpbin.org/get')
   // return getResponse.body
 
-  const wxContext = cloud.getWXContext()
-  
-  return {
-    event,
-    openid: wxContext.OPENID,
-    appid: wxContext.APPID,
-    unionid: wxContext.UNIONID,
-  }
+  // ...
+
+  // ...
+
 
  
-}

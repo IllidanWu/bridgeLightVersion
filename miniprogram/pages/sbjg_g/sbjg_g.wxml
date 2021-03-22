@@ -64,7 +64,10 @@
     </view>
   </picker>
 </view>
-
+<view class="divLine"></view>
+ <text  class="tte" for="ssfsl" >伸缩缝数量： </text>
+  <input class="content" name="ssfsl"
+   placeholder='{{bridge.ssfsl}}' bindinput="bind_ssfsl" />
 <view class="divLine"></view>
  <text  class="tte" for="zqzp" >主桥纵坡： </text>
   <input class="content" name="zqzp"

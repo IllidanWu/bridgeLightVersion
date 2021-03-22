@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "got": "^11.8.1",
+    "officegen": "^0.6.5",
     "wx-server-sdk": "^2.3.3"
   }
 }

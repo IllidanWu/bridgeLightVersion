@@ -23,6 +23,10 @@
   <input class="content" name="qdsl"
    placeholder='{{bridge.qdsl}}' bindinput="bind_qdsl" />
    <view class="divLine"></view>
+ <text  class="tte" for="qdbg" >桥墩标高: </text>
+  <input class="content" name="qdbg"
+   placeholder='{{bridge.qdbg}}' bindinput="bind_qdbg" />
+   <view class="divLine"></view>
  <text  class="tte" for="glcc" >盖梁尺寸: </text>
   <input class="content" name="yhdw"
    placeholder='{{bridge.glcc}}' bindinput="bind_glcc" />

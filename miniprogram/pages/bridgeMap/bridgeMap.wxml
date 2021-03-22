@@ -1,0 +1,5 @@
+<!-- map.wxml
+<map id="map" longitude="111.708984" latitude="34.089061" scale="4" bindcontroltap="controltap" markers="{{markers}}" subkey="6UTBZ-AWPWR-KYRWY-W2X6J-4KQDH-D4FE7" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 100%;"></map> -->
+
+<!-- map.wxml -->
+<map id="map" longitude="120.083486" latitude="30.301241" scale="10" bindcontroltap="controltap" markers="{{markers}}" subkey="6UTBZ-AWPWR-KYRWY-W2X6J-4KQDH-D4FE7" show-compass='true' bindcallouttap="callouttap" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 100%;"></map>

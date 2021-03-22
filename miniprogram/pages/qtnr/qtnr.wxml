@@ -7,39 +7,39 @@
   <view class="divLine"></view> 
   <text  class="tte" for="jskcc" >集水口尺寸: </text>
   <input class="content" name="jskcc"
-   placeholder='{{bridgeInfo.jskcc}}' bindinput="bind_jskcc" />
+   placeholder='{{bridgeReveal.jskcc}}' bindinput="bind_jskcc" />
   <view class="divLine"></view> 
   <text  class="tte" for="jsksl" >集水口数量: </text>
   <input class="content" name="jsksl"
-   placeholder='{{bridgeInfo.jsksl}}' bindinput="bind_jsksl" />
+   placeholder='{{bridgeReveal.jsksl}}' bindinput="bind_jsksl" />
      <view class="divLine"></view> 
   <text  class="tte" for="xsgcc" >泄水管尺寸: </text>
   <input class="content" name="xsgcc"
-   placeholder='{{bridgeInfo.xsgcc}}' bindinput="bind_xsgcc" />
+   placeholder='{{bridgeReveal.xsgcc}}' bindinput="bind_xsgcc" />
      <view class="divLine"></view> 
   <text  class="tte" for="xsgcd" >泄水管长度: </text>
   <input class="content" name="xsgcd"
-   placeholder='{{bridgeInfo.xsgcd}}' bindinput="bind_xsgcd" />
+   placeholder='{{bridgeReveal.xsgcd}}' bindinput="bind_xsgcd" />
      <view class="divLine"></view> 
   <text  class="tte" for="lgzc" >栏杆总长: </text>
   <input class="content" name="lgzc"
-   placeholder='{{bridgeInfo.lgzc}}' bindinput="bind_lgzc" />
+   placeholder='{{bridgeReveal.lgzc}}' bindinput="bind_lgzc" />
      <view class="divLine"></view> 
   <text  class="tte" for="lgjg" >栏杆结构: </text>
   <input class="content" name="lgjg"
-   placeholder='{{bridgeInfo.lgjg}}' bindinput="bind_lgjg" />
+   placeholder='{{bridgeReveal.lgjg}}' bindinput="bind_lgjg" />
      <view class="divLine"></view> 
   <text  class="tte" for="dzcc" >端柱尺寸: </text>
   <input class="content" name="dzcc"
-   placeholder='{{bridgeInfo.dzcc}}' bindinput="bind_dzcc" />
+   placeholder='{{bridgeReveal.dzcc}}' bindinput="bind_dzcc" />
      <view class="divLine"></view> 
   <text  class="tte" for="halx" >护岸类型: </text>
   <input class="content" name="halx"
-   placeholder='{{bridgeInfo.halx}}' bindinput="bind_halx" />
+   placeholder='{{bridgeReveal.halx}}' bindinput="bind_halx" />
      <view class="divLine"></view> 
   <text  class="tte" for="ypdqlx" >引坡挡墙类型: </text>
   <input class="content" name="ypdqlx"
-   placeholder='{{bridgeInfo.ypdqlx}}' bindinput="bind_ypdqlx" />
+   placeholder='{{bridgeReveal.ypdqlx}}' bindinput="bind_ypdqlx" />
         <view class="divLine"></view> 
 
 
@@ -51,19 +51,19 @@
         <view class="divLine"></view> 
      <text  class="tte" for="jsg" >给水管: </text>
   <input class="content" name="jsg"
-   placeholder='{{bridgeInfo.jsg}}' bindinput="bind_jsg" />
+   placeholder='{{bridgeReveal.jsg}}' bindinput="bind_jsg" />
      <view class="divLine"></view> 
   <text  class="tte" for="rqg" >燃气管: </text>
   <input class="content" name="rqg"
-   placeholder='{{bridgeInfo.rqg}}' bindinput="bind_rqg" />
+   placeholder='{{bridgeReveal.rqg}}' bindinput="bind_rqg" />
              <view class="divLine"></view> 
      <text  class="tte" for="dll" >电力缆: </text>
   <input class="content" name="dll"
-   placeholder='{{bridgeInfo.dll}}' bindinput="bind_dll" />
+   placeholder='{{bridgeReveal.dll}}' bindinput="bind_dll" />
              <view class="divLine"></view> 
      <text  class="tte" for="txdl" >通信电缆: </text>
        <input class="content" name="txdl"
-   placeholder='{{bridgeInfo.txdl}}' bindinput="bind_txdl" />
+   placeholder='{{bridgeReveal.txdl}}' bindinput="bind_txdl" />
           <view class="divLine"></view> 
 
   
@@ -73,14 +73,14 @@
              <view class="divLine"></view> 
                <text  class="tte" for="qshj" >侵蚀环境: </text>
   <input class="content" name="qshj"
-   placeholder='{{bridgeInfo.qshj}}' bindinput="bind_qshj" />
+   placeholder='{{bridgeReveal.qshj}}' bindinput="bind_qshj" />
        <view class="divLine"></view> 
                <text  class="tte" for="hdyj" >河道淤积: </text>
   <input class="content" name="hdyj"
-   placeholder='{{bridgeInfo.hdyj}}' bindinput="bind_hdyj" />
+   placeholder='{{bridgeReveal.hdyj}}' bindinput="bind_hdyj" />
        <view class="divLine"></view> 
                <text  class="tte" for="hdcs" >河道冲刷: </text>
   <input class="content" name="hdcs"
-   placeholder='{{bridgeInfo.hdcs}}' bindinput="bind_hdcs" />
+   placeholder='{{bridgeReveal.hdcs}}' bindinput="bind_hdcs" />
 </view>
    <view  class="button_bottom1"  style=" background-color:rgb(9, 96, 230)"  bindtap="bind_Bqtnr" >返回</view>   

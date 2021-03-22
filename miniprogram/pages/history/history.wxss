@@ -16,7 +16,9 @@ font-weight:bold; /*设置字体加粗*/
 
 font-family:"黑体"; /*设置字体为宋体*/
 }
-.tte{font-size:large;width:100%;}
+.tte{font-size:large;
+  width:100%;
+  margin-bottom: 40rpx}
 .tteframe{font-size:large;width:100%;  border:5rpx solid #eee;}
 .title{display:flex;justify-content: left;align-items: center;font-weight:bold;font-size:x-large;}
 

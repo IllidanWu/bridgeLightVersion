@@ -11,37 +11,50 @@
 </view>
 <view class="divLine"></view>
 <view>
-  <picker mode="selector" bindchange="bind_qdxs" value="{{index_qdxs}}" range="{{arr_qdxs}}">
-    <view >
-     <text class="tte">桥墩型式:</text>
-     <view class="content">{{bridgeInfo.qdxs}}</view>
-     </view>
-  </picker>
+  <text class="tte" >桥墩型式：</text>
+<view wx:if="{{bridgeActive.qdxs}}">
+<view >
+<picker bindchange="bind_qdxs" value="{{index_qdxs}}" range="{{arr_qdxs}}">
+<view class="content">{{bridgeReveal.qdxs}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_qdxs" value="{{index_qdxs}}" range="{{arr_qdxs}}">
+<view class="content">{{bridgeInfo.qdxs}}</view>
+</picker>
+</view>
+</view>
 </view>
    <view class="divLine"></view>
  <text  class="tte" for="qdsl" >桥墩数量: </text>
   <input class="content" name="qdsl"
-   placeholder='{{bridgeInfo.qdsl}}' bindinput="bind_qdsl" />
+   placeholder='{{bridgeReveal.qdsl}}' bindinput="bind_qdsl" />
+   <view class="divLine"></view>
+ <text  class="tte" for="qdbg" >桥墩标高: </text>
+  <input class="content" name="qdbg"
+   placeholder='{{bridgeReveal.qdbg}}' bindinput="bind_qdbg" />
    <view class="divLine"></view>
  <text  class="tte" for="glcc" >盖梁尺寸: </text>
   <input class="content" name="yhdw"
-   placeholder='{{bridgeInfo.glcc}}' bindinput="bind_glcc" />
+   placeholder='{{bridgeReveal.glcc}}' bindinput="bind_glcc" />
    <view class="divLine"></view>
     <text  class="tte" for="qdjdbg" >基底标高: </text>
   <input class="content" name="qdjdbg"
-   placeholder='{{bridgeInfo.qdjdbg}}' bindinput="bind_qdjdbg" />
+   placeholder='{{bridgeReveal.qdjdbg}}' bindinput="bind_qdjdbg" />
    <view class="divLine"></view>
     <text  class="tte" for="qddbcc" >底板尺寸 </text>
   <input class="content" name="yhdw"
-   placeholder='{{bridgeInfo.qddbcc}}' bindinput="bind_qddbcc" />
+   placeholder='{{bridgeReveal.qddbcc}}' bindinput="bind_qddbcc" />
    <view class="divLine"></view>
     <text  class="tte" for="qdjzcc" >基桩尺寸: </text>
   <input class="content" name="qdjzcc"
-   placeholder='{{bridgeInfo.qdjzcc}}' bindinput="bind_qdjzcc" />
+   placeholder='{{bridgeReveal.qdjzcc}}' bindinput="bind_qdjzcc" />
    <view class="divLine"></view>
     <text  class="tte" for="qdjzgs" >基桩根数: </text>
   <input class="content" name="qdjzgs"
-   placeholder='{{bridgeInfo.qdjzgs}}' bindinput="bind_qdjzgs" />
+   placeholder='{{bridgeReveal.qdjzgs}}' bindinput="bind_qdjzgs" />
    <view class="divLine"></view>
 
   <view> 
@@ -50,54 +63,63 @@
 </view>
 
    <view class="divLine"></view>
-<view>
-  <picker bindchange="bind_qtxs" value="{{index_qtxs}}" range="{{arr_qtxs}}">
-    <view>
-    <text class="tte">桥台型式:</text>
-    <view class="content">{{bridgeInfo.qtxs}}</view>
-    </view>
-  </picker>
+   <view>
+  <text class="tte" >桥台型式：</text>
+<view wx:if="{{bridgeActive.qtxs}}">
+<view >
+<picker bindchange="bind_qtxs" value="{{index_qtxs}}" range="{{arr_qtxs}}">
+<view class="content">{{bridgeReveal.qtxs}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_qtxs" value="{{index_qtxs}}" range="{{arr_qtxs}}">
+<view class="content">{{bridgeInfo.qtxs}}</view>
+</picker>
+</view>
+</view>
 </view>
    <view class="divLine"></view>
     <text  class="tte" for="qtsl" >桥台数量: </text>
   <input class="content" name="qtsl"
-   placeholder='{{bridgeInfo.qtsl}}' bindinput="bind_qtsl" />
+   placeholder='{{bridgeReveal.qtsl}}' bindinput="bind_qtsl" />
       <view class="divLine"></view>
     <text  class="tte" for="qtbg" >桥台标高: </text>
   <input class="content" name="qtbg"
-   placeholder='{{bridgeInfo.qtbg}}' bindinput="bind_qtbg" />
+   placeholder='{{bridgeReveal.qtbg}}' bindinput="bind_qtbg" />
          <view class="divLine"></view>
     <text  class="tte" for="qtjdbg" >基底标高: </text>
   <input class="content" name="qtjdbg"
-   placeholder='{{bridgeInfo.qtjdbg}}' bindinput="bind_qtjdbg" />
+   placeholder='{{bridgeReveal.qtjdbg}}' bindinput="bind_qtjdbg" />
       <view class="divLine"></view>
     <text  class="tte" for="tmcc" >台帽尺寸: </text>
   <input class="content" name="qdjzgs"
-   placeholder='{{bridgeInfo.tmcc}}' bindinput="bind_tmcc" />
+   placeholder='{{bridgeReveal.tmcc}}' bindinput="bind_tmcc" />
       <view class="divLine"></view>
     <text  class="tte" for="qtdbcc" >底板尺寸: </text>
   <input class="content" name="qtdbcc"
-   placeholder='{{bridgeInfo.qtdbcc}}' bindinput="bind_qtdbcc" />
+   placeholder='{{bridgeReveal.qtdbcc}}' bindinput="bind_qtdbcc" />
          <view class="divLine"></view>
     <text  class="tte" for="qtjzcc" >基桩尺寸: </text>
   <input class="content" name="qtjzcc"
-   placeholder='{{bridgeInfo.qtjzcc}}' bindinput="bind_qtjzcc" />
+   placeholder='{{bridgeReveal.qtjzcc}}' bindinput="bind_qtjzcc" />
          <view class="divLine"></view>
     <text  class="tte" for="qtjzgs" >基桩根数: </text>
   <input class="content" name="qtjzgs"
-   placeholder='{{bridgeInfo.qtjzgs}}' bindinput="bind_qtjzgs" />
+   placeholder='{{bridgeReveal.qtjzgs}}' bindinput="bind_qtjzgs" />
          <view class="divLine"></view>
     <text  class="tte" for="dtbhd" >挡土板厚度: </text>
   <input class="content" name="dtbhd"
-   placeholder='{{bridgeInfo.dtbhd}}' bindinput="bind_dtbhd" />
+   placeholder='{{bridgeReveal.dtbhd}}' bindinput="bind_dtbhd" />
       <view class="divLine"></view>
     <text  class="tte" for="yqxs" >翼墙形式: </text>
   <input class="content" name="yqxs"
-   placeholder='{{bridgeInfo.yqxs}}' bindinput="bind_yqxs" />
+   placeholder='{{bridgeReveal.yqxs}}' bindinput="bind_yqxs" />
          <view class="divLine"></view>
     <text  class="tte" for="yqcd" >翼墙长度: </text>
   <input class="content" name="yqcd"
-   placeholder='{{bridgeInfo.yqcd}}' bindinput="bind_yqcd" />
+   placeholder='{{bridgeReveal.yqcd}}' bindinput="bind_yqcd" />
       <view class="divLine"></view>
     
 

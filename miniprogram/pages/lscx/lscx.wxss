@@ -29,6 +29,7 @@
    border:5rpx;
   }
 
+
   .content{
    font-size:medium;width:90%;
    border:5rpx solid #eee;
@@ -55,8 +56,26 @@
 
    
 .bbc{width:8rpx}
+
 .buttonnp{color:rgb(0, 0, 0);}
 
+                          .button_center{
+                             padding-top: 8rpx;
+                             align-items: center;
+                            text-align: center;
+                          }
+                          .lAL{
+                            align-items: center;
+                            display: flex;
+                          }
+                          .left_long{
+                           padding-top: 8rpx;
+                              flex: 2;
+                          }
+                          .right_lat{
+                           padding-top: 8rpx;
+                             flex:2;
+                          }
 .button-container{
    display:flex;
    flex-direction:column;
@@ -114,4 +133,13 @@
             }
 .button-container.buttonw{border:1rpx solid rgb(56, 55, 55);
    background: #15941b;
+                   }
+
+                   .buttonUnder{
+                     width:90%!important;
+                     color:blueviolet;
+                     display:flex;
+                     border-radius: 5px;
+                     justify-content: center;
+             align-items: center;
                    }

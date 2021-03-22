@@ -1,0 +1,15 @@
+<view class="search_row">
+    <input value="{{inpValue}}"placeholder="请输入您要搜索的桥梁"  bindinput="handleInput" type="text"> </input>
+    <button bindtap="handleCancel" hidden="{{!isFocus}}">取消</button> 
+</view>
+    <view class="tte">
+
+<block wx:for="{{bridgeData}}" wx:key="key"  >
+<view class="divLine"> </view>
+<view class="main">
+<text class="tteframe" data-index ='{{index}}' data-id="{{item._id}}" data-time="{{item.time}}"  bindtap="bind_touch" >{{index+1}}  {{item.qlmc}} 
+记录时间：  {{item.jcrq}}</text>
+  <image class="imgSty" src="{{item.Czmt}}" style="width: 50px; height: 50px; background-color: #eeeeee;float:right;"></image>
+ </view>
+</block>
+</view>

@@ -9,123 +9,159 @@
 
   <text  class="tte" for="gldw" >管理单位: </text>
   <input class="content" name="gldw"
-   placeholder='{{bridgeInfo.gldw}}' bindinput="bind_gldw" />
+   placeholder='{{bridgeReveal.gldw}}' bindinput="bind_gldw" />
 <view class="divLine"></view>
 
   <text  class="tte" for="yhdw" >养护单位: </text>
   <input class="content" name="yhdw"
-   placeholder='{{bridgeInfo.yhdw}}' bindinput="bind_yhdw" />
+   placeholder='{{bridgeReveal.yhdw}}' bindinput="bind_yhdw" />
    <view class="divLine"></view>
 
   <text  class="tte" for="jsdw" >建设单位: </text>
   <input class="content" name="jsdw"
-   placeholder='{{bridgeInfo.jsdw}}' bindinput="bind_jsdw" />
+   placeholder='{{bridgeReveal.jsdw}}' bindinput="bind_jsdw" />
    <view class="divLine"></view>
   <text  class="tte" for="sjdw" >设计单位: </text>
   <input class="content" name="sjdw"
-   placeholder='{{bridgeInfo.sjdw}}' bindinput="bind_sjdw" />
+   placeholder='{{bridgeReveal.sjdw}}' bindinput="bind_sjdw" />
    <view class="divLine"></view>
   <text  class="tte" for="jldw" >监理单位: </text>
   <input class="content" name="jldw"
-   placeholder='{{bridgeInfo.jldw}}' bindinput="bind_jldw" />
+   placeholder='{{bridgeReveal.jldw}}' bindinput="bind_jldw" />
    <view class="divLine"></view>
      <text  class="tte" for="sgdw" >施工单位: </text>
   <input class="content" name="sgdw"
-   placeholder='{{bridgeInfo.sgdw}}' bindinput="bind_sgdw" />
+   placeholder='{{bridgeReveal.sgdw}}' bindinput="bind_sgdw" />
    <view class="divLine"></view>
      <text  class="tte" for="jzny" >建造年月: </text>
   <input class="content" name="jzny"
-   placeholder='{{bridgeInfo.jzny}}' bindinput="bind_jzny" />
+   placeholder='{{bridgeReveal.jzny}}' bindinput="bind_jzny" />
    <view class="divLine"></view>
      <text  class="tte" for="zzj" >总造价: </text>
   <input class="content" name="zzj"
-   placeholder='{{bridgeInfo.zzj}}' bindinput="bind_zzj" />
+   placeholder='{{bridgeReveal.zzj}}' bindinput="bind_zzj" />
    <view class="divLine"></view>
      <text  class="tte" for="yhlb" >养护类别: </text>
   <input class="content" name="yhlb"
-   placeholder='{{bridgeInfo.yhlb}}' bindinput="bind_yhlb" />
+   placeholder='{{bridgeReveal.yhlb}}' bindinput="bind_yhlb" />
    <view class="divLine"></view>
         <text  class="tte" for="yhdj" >养护等级: </text>
   <input class="content" name="yhdj"
-   placeholder='{{bridgeInfo.yhdj}}' bindinput="bind_yhdj" />
+   placeholder='{{bridgeReveal.yhdj}}' bindinput="bind_yhdj" />
    <view class="divLine"></view>
-<view>
+<!-- <view>
   <picker bindchange="bind_dldj" value="{{index_dldj}}" range="{{arr_dldj}}">
     <view >
     <text class="tte" >道路等级：</text>
-    <view class="content">{{bridgeInfo.dldj}}</view>
+    <view class="content">{{bridgeReveal.dldj}}</view>
     </view>
   </picker>
+</view> -->
+<view>
+
+<text class="tte" >道路等级：</text>
+<view wx:if="{{bridgeActive.dldj}}">
+<view >
+<picker bindchange="bind_dldj" value="{{index_dldj}}" range="{{arr_dldj}}">
+<view class="content">{{bridgeReveal.dldj}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_dldj" value="{{index_dldj}}" range="{{arr_dldj}}">
+<view class="content">{{bridgeInfo.dldj}}</view>
+</picker>
+</view>
+</view>
 </view>
    <view class="divLine"></view>
         <text  class="tte" for="jglx" >结构类型: </text>
   <input class="content" name="jglx"
-   placeholder='{{bridgeInfo.jglx}}' bindinput="bind_jglx" />
+   placeholder='{{bridgeReveal.jglx}}' bindinput="bind_jglx" />
       <view class="divLine"></view>
         <text  class="tte" for="sjhz" >设计荷载: </text>
   <input class="content" name="sjhz"
-   placeholder='{{bridgeInfo.sjhz}}' bindinput="bind_sjhz" />
+   placeholder='{{bridgeReveal.sjhz}}' bindinput="bind_sjhz" />
          <view class="divLine"></view>
         <text  class="tte" for="xzbz" >限载标准: </text>
   <input class="content" name="xzbz"
-   placeholder='{{bridgeInfo.xzbz}}' bindinput="bind_xzbz" />
+   placeholder='{{bridgeReveal.xzbz}}' bindinput="bind_xzbz" />
             <view class="divLine"></view>
         <text  class="tte" for="kzld" >抗震烈度: </text>
   <input class="content" name="kzld"
-   placeholder='{{bridgeInfo.kzld}}' bindinput="bind_kzld" />
+   placeholder='{{bridgeReveal.kzld}}' bindinput="bind_kzld" />
            <view class="divLine"></view>
-<view>
+<!-- <view>
   <picker bindchange="bind_zxjj" value="{{index_zxjj}}" range="{{arr_zxjj}}">
     <view >
     <text class="tte" >正斜交角: </text>
-    <view class="content">{{bridgeInfo.zxjj}}</view>
+    <view class="content">{{bridgeReveal.zxjj}}</view>
     </view>
   </picker>
+</view> -->
+<view>
+
+<text class="tte" >正斜交角：</text>
+<view wx:if="{{bridgeActive.zxjj}}">
+<view >
+<picker bindchange="bind_zxjj" value="{{index_zxjj}}" range="{{arr_zxjj}}">
+<view class="content">{{bridgeReveal.zxjj}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_zxjj" value="{{index_zxjj}}" range="{{arr_zxjj}}">
+<view class="content">{{bridgeInfo.zxjj}}</view>
+</picker>
+</view>
+</view>
 </view>
 <view class="divLine"></view>
 <view>
   <label   class="tte">请输入桥梁跨数: </label>
   <input class="content" name="qlks"
-   placeholder='{{bridgeInfo.qlks}}' bindinput="bind_qlks"/>
+   placeholder='{{bridgeReveal.qlks}}' bindinput="bind_qlks"/>
 </view>
 <view class="divLine"></view>
 <view>
   <label   class="tte" >请输入跨径组合: </label>
   <input class="content" name="kjzh"
-   placeholder='{{bridgeInfo.kjzh}}'   bindinput="bind_kjzh"  />
+   placeholder='{{bridgeReveal.kjzh}}'   bindinput="bind_kjzh"  />
 </view>
          <view class="divLine"></view>
         <text  class="tte" for="qmmj" >桥面面积: </text>
   <input class="content" name="qmmj"
-   placeholder='{{bridgeInfo.qmmj}}' bindinput="bind_qmmj" />
+   placeholder='{{bridgeReveal.qmmj}}' bindinput="bind_qmmj" />
             <view class="divLine"></view>
         <text  class="tte" for="qlzc" >桥梁总长: </text>
   <input class="content" name="qlzc"
-   placeholder='{{bridgeInfo.qlzc}}' bindinput="bind_qlzc" />
+   placeholder='{{bridgeReveal.qlzc}}' bindinput="bind_qlzc" />
                <view class="divLine"></view>
         <text  class="tte" for="qlzk" >桥梁总宽: </text>
   <input class="content" name="qlzk"
-   placeholder='{{bridgeInfo.qlzk}}' bindinput="bind_qlzk" />
+   placeholder='{{bridgeReveal.qlzk}}' bindinput="bind_qlzk" />
                   <view class="divLine"></view>
         <text  class="tte" for="cxdjk" >车行道净宽: </text>
   <input class="content" name="cxdjk"
-   placeholder='{{bridgeInfo.cxdjk}}' bindinput="bind_cxdjk" />
+   placeholder='{{bridgeReveal.cxdjk}}' bindinput="bind_cxdjk" />
                      <view class="divLine"></view>
         <text  class="tte" for="rxdjk" >人行道净宽: </text>
   <input class="content" name="rxdjk"
-   placeholder='{{bridgeInfo.rxdjk}}' bindinput="bind_rxdjk" />
+   placeholder='{{bridgeReveal.rxdjk}}' bindinput="bind_rxdjk" />
                      <view class="divLine"></view>
         <text  class="tte" for="hddj" >河道等级: </text>
   <input class="content" name="hddj"
-   placeholder='{{bridgeInfo.hddj}}' bindinput="bind_hddj" />
+   placeholder='{{bridgeReveal.hddj}}' bindinput="bind_hddj" />
                      <view class="divLine"></view>
         <text  class="tte" for="zgsw" >最高水位: </text>
   <input class="content" name="zgsw"
-   placeholder='{{bridgeInfo.zgsw}}' bindinput="bind_zgsw" />
+   placeholder='{{bridgeReveal.zgsw}}' bindinput="bind_zgsw" />
                      <view class="divLine"></view>
         <text  class="tte" for="csw" >常水位: </text>
   <input class="content" name="csw"
-   placeholder='{{bridgeInfo.csw}}' bindinput="bind_csw" />
+   placeholder='{{bridgeReveal.csw}}' bindinput="bind_csw" />
 
 
 

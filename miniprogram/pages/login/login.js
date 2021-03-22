@@ -1,4 +1,5 @@
 // pages/login/login.js
+var app=getApp()
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
@@ -7,6 +8,7 @@ Page({
   },
 
   onLoad: function () {
+
     var that = this;
     // 查看是否授权
     wx.getSetting({
@@ -45,7 +47,8 @@ Page({
       wx.redirectTo({
         url: '../qljc/qljc',
         success: (result)=>{
-          
+          app.globalData.count=0
+          app.globalData.backMain=0
         },
         fail: ()=>{},
         complete: ()=>{}
@@ -70,7 +73,17 @@ Page({
     }
   }
 ,
+bind_bridgemap: function(e){
 
+  wx.redirectTo({
+    url: '../bridgeMap/bridgeMap',
+    success: (result)=>{
+      
+    },
+    fail: ()=>{},
+    complete: ()=>{}
+  });
+},
 bind_history: function() {
   var that = this
  

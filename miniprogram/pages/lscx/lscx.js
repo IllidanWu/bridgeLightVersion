@@ -10,6 +10,7 @@ var bridgelysgd
 var bridgepsg
 var bridgedbcd
 var bridgeSrc
+var _id
 var app = getApp();
 wx.cloud.init();
     //1、引用数据库
@@ -27,8 +28,6 @@ wx.cloud.init();
         console.log(bridgeList)
       },
     })
-
-
    // 初始化 cloud
 
 //2、开始查询数据了  yyyyy对应的是集合的名称
@@ -95,31 +94,34 @@ Page({
     hiddenmodalput_lgcc: true,
     hiddenmodalput_lysgd: true,
     hiddenmodalput_psg: true,
-    hiddenmodalput_dbcd: true
+    hiddenmodalput_dbcd: true,
+    long: 0,
+    lat:0
   },
 
   
   onLoad: function (options) {
     var that=this
     const _id=wx.getStorageSync('bridgeListID')
+    this.setData({
+      _id
+    })
     var bridgeList = wx.getStorageSync('bridgeList')
-
-    var time=wx.getStorageSync('bridgeListTime')
-    
-   this.Hello();
-    console.log(time)
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
-    console.log(_id)
-    
-
+   
 if(app.globalData.reveal_lscx==0){
   var items = JSON.parse(this.options.items);
   that.setData({
-   bridge:items
+   bridge:items,
+   long: items.long.toFixed(5),
+   lat: items.lat.toFixed(5)
   })
-   
+
     }
 else if(  app.globalData.reveal_lscx==1){
+  // wx.setStorage({
+  //   data: '',
+  //   key: 'bridgeListID',
+  // })
   console.log('AMD')
   app.globalData.reveal_lscx=0;
   bridgeListCollection.doc(_id).get({
@@ -129,8 +131,17 @@ else if(  app.globalData.reveal_lscx==1){
       console.log(bridgeSrc)
       wx.setStorageSync('bridgeSrc',res.data);
       console.log(res.data)
+      var OCzmt=bridgeSrc.Czmt
+      var OClmt=bridgeSrc.Clmt
+
       this.setData({
-        bridge: bridgeSrc
+        bridge: bridgeSrc,
+        OCzmt: OCzmt,
+        OClmt: OClmt
+      })
+      this.setData({
+        long: bridgeSrc.long.toFixed(5),
+        lat: bridgeSrc.lat.toFixed(5)
       })
       console.log(bridge) 
       console.log(bridge)
@@ -144,39 +155,31 @@ console.log('error')
     this.setData(
       {
         bridgeInfo: bridgeList,
-        qlbh: qlbh
-       
+
       }
     )
-    wx.getSavedFileList({
-      success (res) {
-        console.log(res.bridgeList)
-      }
-    })
-    console.log(this.data.bridgeInfo)
   },
-
   g_map:function(){
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
+   
     wx.chooseLocation({
       type:'gcj02',
-
       success:(res)=> {
+        console.log(res)
         var latitude=res.latitude
         var longitude=res.longitude
+        var lo=res.longitude
+        var la=res.latitude
         this.setData({
+          [`bridge.lat`]:la,
+          [`bridge.long`]: lo
+        })
+        console.log(latitude)
+        console.log(longitude)
+        that.setData({
           lat:latitude.toFixed(5),
           long:longitude.toFixed(5),
-        })
-        
-        this.setData({
-          [`bridge.lat`]:latitude,
-          [`bridge.long`]: longitude
-        })
-        console.log(latitude.toFixed(5))
-        console.log(longitude.toFixed(5))
+        })  
       }
-     
     })
     var that = this;
     setTimeout(function () {
@@ -194,7 +197,6 @@ console.log('error')
   },
   g_chooseimage1: function (e) {
     var that = this;
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
 
     wx.chooseImage({
       sizeType: ['compressed'],  //可选择原图或压缩后的图片
@@ -209,14 +211,14 @@ console.log('error')
               cWidth:res.width
              
             })
-            that.getCanvasImg(result.tempFilePaths, res.width, res.height, that.data.quality, function (res) {
+     that.getCanvasImg(result.tempFilePaths, res.width, res.height, that.data.quality, function (res) {
               app.globalData.path = res.tempFilePaths
        
        
         that.setData({  
           isActive1,
          path1:res.tempFilePath,
-         [`bridge.zmt`]: res.tempFilePath
+         [`bridge.zmt`]: res.tempFilePath,
         }) 
         console.log(res.tempFilePath)
             });
@@ -227,34 +229,11 @@ console.log('error')
     })
   
   },
-  /**
-   * 质量压缩
-   */
-  getCanvasImg(tempFilePaths, canvasWidth, canvasHeight, quality, callback) {
-    var that = this; 
-    const ctx = wx.createCanvasContext('attendCanvasId');
-    ctx.clearRect(0, 0, 800,600);
-    ctx.drawImage(tempFilePaths[0], 0, 0, 800, 600);
-    ctx.draw(false, function () {
-      wx.canvasToTempFilePath({
-        canvasId: 'attendCanvasId',
-        fileType: 'jpg',
-        quality: quality,
-        success: function success(res) {
-      
-          callback && callback(res)
-        }, fail: function (e) {
-          wx.showToast({
-            title: '图片上传失败，请重新上传！',
-            icon: 'none'
-          })
-        }
-      });
-    });
-  },
+
+ 
   g_chooseimage2: function (e) {
     var that = this;
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
+   
     wx.chooseImage({
       sizeType: ['compressed'],  //可选择原图或压缩后的图片
       sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
@@ -300,18 +279,17 @@ console.log('error')
         success: function success(res) {
           callback && callback(res)
         }, fail: function (e) {
-          wx.showToast({
-            title: '图片上传失败，请重新上传！',
-            icon: 'none'
-          })
+          // wx.showToast({
+          //   title: '图片上传失败，请重新上传！',
+          //   icon: 'none'
+          // })
         }
       });
     });
   },
 
   bind_jcrq:function(e){
-    var that=this;
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
+   
     this.setData({    
       [`bridge.jcrq`]: e.detail.value,  
     })
@@ -322,8 +300,7 @@ console.log('error')
 
 
 bind_jcsj:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
     [`bridge.jcsj`]: e.detail.value,
   })
@@ -332,9 +309,7 @@ bind_jcsj:function(e){
 },
 
 bind_jcdq:function(e){
-  var that=this;
-  var region
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
     region: e.detail.value
     
@@ -349,10 +324,9 @@ bind_jcdq:function(e){
 
 
 
-/*注意点！准备提问！*/
+
 bind_hqxjcfx: function(e) {
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
    this.index_hqxjcfx=e.detail.value
   this.setData({
     index_hqxjcfx: this.index_hqxjcfx
@@ -362,8 +336,7 @@ bind_hqxjcfx: function(e) {
   })
 } ,
 bind_sqxjcfx:function(e){
-   var that=this;
-   var qlbh = wx.getStorageSync('qlbh', qlbh)
+  
    this.index_sqxjcfx=e.detail.value
    this.setData(
      {
@@ -371,8 +344,6 @@ bind_sqxjcfx:function(e){
        
      }
    )
-    
-
   this.setData({
     [`bridge.sqxjcfx`]: this.data.arr_sqxjcfx[this.data.index_sqxjcfx],
   })
@@ -389,7 +360,7 @@ g_qlmc: function() {
   
 },
 confirm_qlmc: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_qlmc: true,
       ['bridge.qlmc']: this.data.bridgename
@@ -398,14 +369,11 @@ confirm_qlmc: function() {
   console.log (this.data.bridgeInfo)
 },
 m_qlmc:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgename': e.detail.value,
     }
   )
-  console.log(bridgename)
   
 },
 cancel_qlmc: function() {
@@ -420,7 +388,7 @@ g_szlm: function() {
   })
 },
 confirm_szlm: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_szlm: true,
       [`bridge.szlm`]:this.data.bridgeroad
@@ -429,7 +397,6 @@ confirm_szlm: function() {
   console.log (this.data.bridgeInfo)
 },
 m_szlm:function(e){
-  var that=this;
   
   this.setData(
     {
@@ -451,7 +418,6 @@ cancel_szlm: function() {
 
 
 bind_kyhl:function(e){
-  var that=this;
   this.setData({
     'bridgeInfo.kyhl': e.detail.value,
   })
@@ -464,7 +430,7 @@ g_kyhl: function() {
   })
 },
 confirm_kyhl: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_kyhl: true,
       [`bridge.kyhl`]:this.data.bridgeriver
@@ -472,8 +438,6 @@ confirm_kyhl: function() {
  
 },
 m_kyhl:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgeriver': e.detail.value,
@@ -495,7 +459,7 @@ g_qlks: function() {
   })
 },
 confirm_qlks: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_qlks: true,
       [`bridge.qlks`]:this.data.bridgeqlks
@@ -503,8 +467,6 @@ confirm_qlks: function() {
  
 },
 m_qlks:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgeqlks': e.detail.value,
@@ -523,7 +485,7 @@ g_kjzh: function() {
   })
 },
 confirm_kjzh: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_kjzh: true,
       [`bridge.kjzh`]:this.data.bridgekjzh
@@ -531,8 +493,6 @@ confirm_kjzh: function() {
  
 },
 m_kjzh:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgekjzh': e.detail.value,
@@ -553,7 +513,7 @@ g_hxbz: function() {
   })
 },
 confirm_hxbz: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_hxbz: true,
       [`bridge.hxbz`]:this.data.bridgehxbz
@@ -561,8 +521,6 @@ confirm_hxbz: function() {
  
 },
 m_hxbz:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgehxbz': e.detail.value,
@@ -586,7 +544,7 @@ g_lgcc: function() {
   })
 },
 confirm_lgcc: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_lgcc: true,
       [`bridge.lgcc`]:this.data.bridgelgcc
@@ -594,8 +552,6 @@ confirm_lgcc: function() {
  
 },
 m_lgcc:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgelgcc': e.detail.value,
@@ -616,7 +572,7 @@ g_lysgd: function() {
   })
 },
 confirm_lysgd: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_lysgd: true,
       [`bridge.lysgd`]:this.data.bridgelysgd
@@ -624,8 +580,6 @@ confirm_lysgd: function() {
  
 },
 m_lysgd:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgelysgd': e.detail.value,
@@ -647,7 +601,7 @@ g_psg: function() {
   })
 },
 confirm_psg: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_psg: true,
       [`bridge.psg`]:this.data.bridgepsg
@@ -655,8 +609,6 @@ confirm_psg: function() {
  
 },
 m_psg:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgepsg': e.detail.value,
@@ -678,7 +630,7 @@ g_dbcd: function() {
   })
 },
 confirm_dbcd: function() {
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.setData({
       hiddenmodalput_dbcd: true,
       [`bridge.dbcd`]:this.data.bridgedbcd
@@ -686,8 +638,6 @@ confirm_dbcd: function() {
  
 },
 m_dbcd:function(e){
-  var that=this;
-  
   this.setData(
     {
         'bridgedbcd': e.detail.value,
@@ -703,8 +653,7 @@ cancel_dbcd: function() {
 
 
 bind_dldj:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_dldj=e.detail.value
   this.setData(
     {
@@ -717,8 +666,7 @@ bind_dldj:function(e){
 },
 
 bind_qmjg:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_qmjg=e.detail.value
   this.setData(
     {
@@ -731,8 +679,7 @@ bind_qmjg:function(e){
 },
 
 bind_ssfxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
    this.index_ssfxs=e.detail.value
    this.setData(
      {
@@ -745,8 +692,7 @@ bind_ssfxs:function(e){
 },
 
 bind_zxjj:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
    this.index_zxjj=e.detail.value
    this.setData(
      {
@@ -760,8 +706,7 @@ bind_zxjj:function(e){
 
 
 bind_qtxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_qtxs=e.detail.value
   
   this.setData(
@@ -776,8 +721,7 @@ bind_qtxs:function(e){
 },
 
 bind_qdxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_qdxs=e.detail.value
   this.setData(
     {
@@ -790,8 +734,7 @@ bind_qdxs:function(e){
 },
 
 bind_jltx:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
      this.index_jltx=e.detail.value
      this.setData(
        {
@@ -804,8 +747,7 @@ bind_jltx:function(e){
 },
 
 bind_hjmxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
     this.index_hjmxs=e.detail.value
     this.setData(
       {
@@ -818,8 +760,7 @@ bind_hjmxs:function(e){
 },
 
 bind_sgff:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_sgff=e.detail.value
   this.setData(
     {
@@ -832,8 +773,7 @@ bind_sgff:function(e){
 },
 
 bind_hxlx:function(e){
-  var that=this; 
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
    this.index_hxlx=e.detail.value
    this.setData(
      {
@@ -846,8 +786,7 @@ bind_hxlx:function(e){
 },
 
 bind_zzxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_zzxs=e.detail.value
   this.setData(
     {
@@ -860,8 +799,7 @@ bind_zzxs:function(e){
 },
 
 bind_clxs:function(e){
-  var that=this;
-  var qlbh = wx.getStorageSync('qlbh', qlbh)
+ 
   this.index_clxs=e.detail.value
   this.setData(
     {
@@ -878,30 +816,40 @@ bind_clxs:function(e){
 
 
 bind_amd:  async function(e) {
-  const _id=wx.getStorageSync('bridgeListID')        
+  var that=this
+  var _id=that.data._id
+  var isActive1=that.data.isActive1
+  var isActive2=that.data.isActive2   
+  var OCzmt=that.data.OCzmt
+  var OClmt=that.data.OClmt
     var that = this
    var bridgeADDR=that.data.bridge
-   console.log(bridgeADDR)
-   var qlbh = wx.getStorageSync('qlbh', qlbh)
+   console.log(bridgeADDR.zmt)
+   console.log(bridgeADDR.lmt)
+  //  await this.uploadPhotoToDatabase1(bridgeADDR.zmt),
+  //  await this.uploadPhotoToDatabase2(bridgeADDR.lmt)
 
-
-        await this.uploadPhotoToDatabase1(bridgeADDR.zmt),
-        await this.uploadPhotoToDatabase2(bridgeADDR.lmt)
-
-
- 
-    // saveBridgeList(bridgeInfo);
-    wx.showModal  ({
-      title: '请确认修改',
-      content: '是否修改?',
-       success(res)   {
-        if (res.confirm) {
-
-          console.log(_id)
-          bridgeListCollection.doc(_id).update(
-            {
-        
-              data:{          
+  if(isActive1!=1||isActive2!=1)
+  {
+    console.log('isActive=1')
+   // saveBridgeList(bridgeInfo);
+   wx.showModal  ({
+    title: '请确认修改',
+    content: '是否修改?',
+     success(res)   {
+      if (res.confirm) {
+        wx.showLoading({
+          title:"正在上传......",
+        })
+        wx.cloud.deleteFile({
+          fileList: [OClmt,OCzmt],
+       }).then(res=>{
+     that.uploadPhotoToDatabase1(bridgeADDR.zmt).then(res=>{
+      that.uploadPhotoToDatabase2(bridgeADDR.lmt).then(res=>{
+        console.log(_id)
+        bridgeListCollection.doc(_id).update(
+          {     
+            data:{          
 Clmt:that.data.bridge.Clmt,
 Czmt: that.data.bridge.Czmt,
 clxs:that.data.bridge.clxs,
@@ -1004,27 +952,190 @@ zxjj: that.data.bridge.zxjj,
 zzj: that.data.bridge.zzj,
 zzsl: that.data.bridge.zzsl,
 zzxs: that.data.bridge.zzxs,
-              }          
-            
-            }).then(res=>
-            {
-            console.log(that.data.bridge)
-            }
-            )        
-
-          console.log('save confirm')
-          console.log('form发生了submit事件，携带数据为：', e.detail.value);  
-        
-   
-         
-        } else if (res.cancel) {
-          console.log('save cancel')
-        }
+ssfsl: that.data.bridge.ssfsl,
+qdbg: that.data.bridge.qdbg,
+            }          
+          }).then(res => {
+            wx.redirectTo({
+              url: '../history/history',
+            })
+              }).then(res=>
+          {
+            wx.showToast({
+              title:"上传成功！",
+              duration:2000
+            })
+          }).catch(err=>{
+            wx.showToast({
+              title:"上传失败，请检查网络！",
+              icon:"none",
+              duration:2000
+            })
+          })
+      })
+     }),
+       console.log('AMD')
+       }) 
+      } else if (res.cancel) {
+        console.log('save cancel')
       }
-    })
+    }
+  })
+  }
+  else{
+    console.log('isActive=0')
+   // saveBridgeList(bridgeInfo);
+   wx.showModal  ({
+    title: '请确认修改',
+    content: '是否修改?',
+     success(res)   {
+      if (res.confirm) {
+        wx.showLoading({
+          title:"正在上传......",
+        })
+    //     wx.cloud.deleteFile({
+    //       fileList: [OClmt,OCzmt],
+    //    }).then(res=>{
+    // //  that.uploadPhotoToDatabase1(bridgeADDR.zmt).then(res=>{
+    // //   that.uploadPhotoToDatabase2(bridgeADDR.lmt).then(res=>{
+    // //     console.log(_id)
+        bridgeListCollection.doc(_id).update(
+          {
+      
+            data:{          
+Clmt:that.data.bridge.Clmt,
+Czmt: that.data.bridge.Czmt,
+clxs:that.data.bridge.clxs,
+csw: that.data.bridge.csw,
+cxdjk: that.data.bridge.cxdjk,
+dbcd:that.data.bridge.dbcd,
+dldj:that.data.bridge.dldj,
+dll: that.data.bridge.dll,
+dtbhd: that.data.bridge.dtbhd,
+dzcc: that.data.bridge.dzcc,
+glcc:that.data.bridge.glcc,
+gldw: that.data.bridge.gldw,
+gqskb: that.data.bridge.gqskb,
+halx:that.data.bridge.halx,
+hdcs: that.data.bridge.hdcs,
+hddj: that.data.bridge.hddj,
+hdyj: that.data.bridge.hdyj,
+hjmxs: that.data.bridge.hjmxs,
+hlxs: that.data.bridge.hlxs,
+hqxjcfx:that.data.bridge.hqxjcfx,
+hxbz: that.data.bridge.hxbz,
+hxlx: that.data.bridge.hxlx,
+jcdq:that.data.bridge.jcdq,
+jcrq:that.data.bridge.jcrq,
+jcsj: that.data.bridge.jcsj,
+jglx:that.data.bridge.jglx,
+jldw: that.data.bridge.jldw,
+jltx: that.data.bridge.jltx,
+jsdw: that.data.bridge.jsdw,
+jsg:that.data.bridge.jsg,
+jskcc: that.data.bridge.jskcc,
+jsksl: that.data.bridge.jsksl,
+jzny: that.data.bridge.jzny,
+kjzh: that.data.bridge.kjzh,
+kyhl:that.data.bridge.kyhl,
+kzld: that.data.bridge.kzld,
+lat: that.data.bridge.lat,
+lgcc:that.data.bridge.lgcc,
+lgjg: that.data.bridge.lgjg,
+lgzc: that.data.bridge.lgzc,
+lmt: that.data.bridge.lmt,
+long: that.data.bridge.long,
+lysgd: that.data.bridge.lysgd,
+psg: that.data.bridge.psg,
+qddbcc: that.data.bridge.qddbcc,
+qdjdbg: that.data.bridge.qdjdbg,
+qdjzcc: that.data.bridge.qdjzcc,
+qdjzgs: that.data.bridge.qdjzgs,
+qdsl: that.data.bridge.qdsl,
+qdxs: that.data.bridge.qdxs,
+qlks: that.data.bridge.qlks,
+qlmc: that.data.bridge.qlmc,
+qlzc: that.data.bridge.qlzc,
+qlzk: that.data.bridge.qlzk,
+qmjg: that.data.bridge.qmjg,
+qmmj: that.data.bridge.qmmj,
+qmpzhd: that.data.bridge.qmpzhd,
+qshj:that.data.bridge.qshj,
+qtbg: that.data.bridge.qtbg,
+qtdbcc: that.data.bridge.qtdbcc,
+qtjdbg: that.data.bridge.qtjdbg,
+qtjzcc: that.data.bridge.qtjzcc,
+qtjzgs: that.data.bridge.qtjzgs,
+qtsl: that.data.bridge.qtsl,
+qtxs: that.data.bridge.qtxs,
+qxxg: that.data.bridge.qxxg,
+rqg: that.data.bridge.rqg,
+rxdjk: that.data.bridge.rxdjk,
+sgdw: that.data.bridge.sgdw,
+sgff: that.data.bridge.sgff,
+sjdw: that.data.bridge.sjdw,
+sjhz: that.data.bridge.sjhz,
+sqxjcfx: that.data.bridge.sqxjcfx,
+ssfxs: that.data.bridge.ssfxs,
+szlm: that.data.bridge.szlm,
+tempFilePaths: that.data.bridge.tempFilePaths,
+time: that.data.bridge.time,
+tmcc: that.data.bridge.tmcc,
+txdl: that.data.bridge.txdl,
+xsgcc: that.data.bridge.xsgcc,
+xsgcd: that.data.bridge.xsgcd,
+xzbz: that.data.bridge.xzbz,
+yhdj: that.data.bridge.yhdj,
+yhdw: that.data.bridge.yhdw,
+yhlb: that.data.bridge.yhlb,
+ypdqlx: that.data.bridge.ypdqlx,
+yqcd: that.data.bridge.yqcd,
+yqhp: that.data.bridge.yqhp,
+yqxs: that.data.bridge.yqxs,
+yqzp: that.data.bridge.yqzp,
+zgsw: that.data.bridge.zgsw,
+zkqxjk: that.data.bridge.zkqxjk,
+zlcc: that.data.bridge.zlcc,
+zlsl: that.data.bridge.zlsl,
+zlxs: that.data.bridge.zlxs,
+zmt: that.data.bridge.zmt,
+zqhb: that.data.bridge.zqhb,
+zqzp: that.data.bridge.zqzp,
+zxjj: that.data.bridge.zxjj,
+zzj: that.data.bridge.zzj,
+zzsl: that.data.bridge.zzsl,
+zzxs: that.data.bridge.zzxs,
+            }          
+          }).then(res => {
+            wx.redirectTo({
+              url: '../history/history',
+            })
+              }).then(res=>
+          {
+            wx.showToast({
+              title:"上传成功！",
+              duration:2000
+            })
+          }).catch(err=>{
+            wx.showToast({
+              title:"上传失败，请检查网络！",
+              icon:"none",
+              duration:2000
+            })
+      //     })
+      // })
+     }),
+       console.log('AMD')
+      //  }) 
+      } else if (res.cancel) {
+        console.log('save cancel')
+      }
+    }
+  })
+  }
+ 
   },
   bind_ybzl: function(){
-    var that=this;
     var items = JSON.stringify(this.data.bridge);
     wx.redirectTo({
       url: '/pages/ybzl_g/ybzl_g?items=' +items
@@ -1032,7 +1143,6 @@ zzxs: that.data.bridge.zzxs,
 
   },
   bind_qtnr: function(){
-    var that=this;
     var items = JSON.stringify(this.data.bridge);
     wx.redirectTo({
       url: '/pages/qtnr_g/qtnr_g?items=' +items
@@ -1040,7 +1150,6 @@ zzxs: that.data.bridge.zzxs,
 
   },
   bind_sbjg: function(){
-    var that=this;
     var items = JSON.stringify(this.data.bridge);
     wx.redirectTo({
       url: '/pages/sbjg_g/sbjg_g?items=' +items
@@ -1048,58 +1157,65 @@ zzxs: that.data.bridge.zzxs,
 
   },
   bind_xbjg: function(){
-    var that=this;
     var items = JSON.stringify(this.data.bridge);
     wx.redirectTo({
       url: '/pages/xbjg_g/xbjg_g?items=' +items
     }) 
 
   },
-bind_delete: function(e){
- var that=this
- const _id=wx.getStorageSync('bridgeListID')
-  bridgeListCollection.doc(_id).remove({
-    success: res => {
-      that.setData(
-        {
-          bridge:''
-        }
-      )
+  bind_delete: function(e){
+    wx.showModal  ({
+      title: '请确删除该条记录',
+      content: '是否删除?',
+       success(res)   {
+        if (res.confirm) {
+    wx.showLoading({
+      title:"正在删除......",
+    }).catch(err=>{
       wx.showToast({
-        title: '删除成功'
-      }) 
+        title:"删除失败！",
+        icon:"none",
+        duration:2000
+      })
+    })
+    var that=this
+    var bridge=that.data.bridge
+     var _id=that.data._id
+    //const _id=wx.getStorageSync('bridgeListID')
+    wx.cloud.deleteFile({
+      fileList: [bridge.Cwordid,bridge.Clmt,bridge.Czmt,bridge.Cqrcode],
+   }).then(res => {
+     bridgeListCollection.doc(_id).remove({
+       success: res => {
+         that.setData(
+           {
+             bridge:''
+           }
+         )
+         wx.showToast({
+           title: '删除成功'
+         }).then(res => {
+          wx.redirectTo({
+            url: '../history/history',
+          })
+            })
+   }
+    } )
+   })
+  } else if (res.cancel) {
+    console.log('save cancel')
+  }
 }
- } )
-},
-
-async Hello(){
-// 初始化 Cloud 实例
-// 容器调用必填环境id，不能为空
-var c1 = new wx.cloud.Cloud({
-  resourceEnv: 'qljc-0b2vv'
 })
-await c1.init()
+   },
 
-// 返回值同 wx.request
-const res = await c1.callContainer({
-  path: '//nodejs-hello-world', // 填入容器的访问路径（云托管-服务列表-路径）
-  // 其余参数同 wx.request
-  method: 'POST',
-})
 
-console.log(res)
-  
-  console.log(res)
-  console.log(res.data)
-},
 
   bind_history: function() {
-    var that = this
     wx.showModal({
       title: '请确认',
       content: '是否前往?',
       success(res) {
-
         if (res.confirm) {
           console.log('history confirm')
           var bridgeList = wx.getStorageSync('bridgeList') || [] //获取本地缓存
@@ -1107,13 +1223,10 @@ console.log(res)
           wx.redirectTo({
             url: '../history/history',
             success: (result)=>{
-              
             },
-           
             fail: ()=>{},
             complete: ()=>{}
           });
-
         } else if (res.cancel) {
           console.log('modify cancel')
         }
@@ -1121,60 +1234,18 @@ console.log(res)
     })
   },
  
-  bind_rst: function(e) {
-    var that=this
-    var qlbh = wx.getStorageSync('qlbh', qlbh)
-    this.setData(
-      {
-      [`bridge.jcsj`]: '00:00',   
-      [`bridge.jcrq`]: '2020-01-01',
-      [`bridge.jcdq`]: ['浙江省', '杭州市', '西湖区'],
-      [`bridge.hqxjcfx`]: '/',
-      [`bridge.sqxjcfx`]: '/',
-      [`bridge.dldj`]: '/',
-      [`bridge.qmjg`]: '/',
-      [`bridge.ssfxs`]: '/',
-      [`bridge.zxjj`]: '/',
-      [`bridge.qtxs`]: '/',
-      [`bridge.qdxs`]: '/',
-      [`bridge.jltx`]: '/',
-      [`bridge.hjmxs`]: '/',
-      [`bridge.sgff`]: '/',
-      [`bridge.hxlx`]: '/',
-      [`bridge.zzxs`]: '/',
-      [`bridge.clxs`]: '/',
-      [`bridge.long`] : '0',
-      [`bridge.lat`] : '0',
-      [`bridge.zmt`]: '',
-      [`bridge.lmt`]: '',
-      [`bridge.qlmc`]: '',
-      [`bridge.szlm`]: '',
-      [`bridge.kyhl`]: '',
-      [`bridge.qlks`]: '',
-      [`bridge.kjzh`]: '',
-      [`bridge.hxbz`]: '',
-      [`bridge.lgcc`]: '',
-      [`bridge.lysgd`]: '',
-      [`bridge.psg`]: '',
-      [`bridge.dbcd`]: ''
-      }
-    )
-  },
-  bind_record: function() {
-    var that = this
+  
+  bind_qljc: function() {
     wx.showModal({
       title: '请确认',
       content: '是否前往?',
       success(res) {
-
         if (res.confirm) {
-          console.log('history confirm')
-          var bridgeList = wx.getStorageSync('bridgeList') || [] //获取本地缓存
-          wx.setStorageSync('bridgeList', bridgeList);
           wx.redirectTo({
             url: '../qljc/qljc',
             success: (result)=>{
-              
+              app.globalData.backMain=0
+              app.globalData.count=0
             },
            
             fail: ()=>{},
@@ -1193,31 +1264,29 @@ console.log(res)
   uploadPhotoToDatabase1: async  function(address) {
     console.log(address)
     var that=this
-
-  
-    
      await wx.cloud.uploadFile({
-      cloudPath:"photoData/"+that.data.bridge.qlmc+"zmt"+Date.now()+".jpg",
+      cloudPath:"photoData/"+that.data.bridge.qlmc+"-正面图"+Date.now()+".jpg",
       filePath:address,
      }).then(res=>{
-
+       console.log(res.fileID)
         this.setData(
           {
            'bridge.Czmt': res.fileID,
           }
         )    
-
+      
+      }).then(res=>{
         wx.hideLoading()
         wx.showToast({
-          icon:"loading",
-          duration:500
+          title:"图片上传成功！",
+          duration:2000
         })
       }).catch(err=>{
-          wx.showToast({
-            title:"上传失败，请检查网络！",
-            icon:"none",
-            duration:2000
-          })
+          // wx.showToast({
+          //   title:"上传失败，请检查网络！",
+          //   icon:"none",
+          //   duration:2000
+          // })
         })
       },
 
@@ -1225,30 +1294,160 @@ console.log(res)
    console.log(address)
     var that=this
      await wx.cloud.uploadFile({
-      cloudPath:"photoData/"+that.data.bridge.qlmc+"lmt"+Date.now()+".jpg",
+      cloudPath:"photoData/"+that.data.bridge.qlmc+"-立面图"+Date.now()+".jpg",
       filePath:address,
-     }).then(res=>{
-
+     }).then(res=>{ 
         this.setData(
           {
            'bridge.Clmt': res.fileID,
           }
         )
-
+       
+      }).then(res=>{
         wx.hideLoading()
         wx.showToast({
-          icon:"loading",
-          duration:500
+          title:"图片上传成功！",
+          duration:2000
         })
       }).catch(err=>{
-          wx.showToast({
-            title:"上传失败，请检查网络！",
-            icon:"none",
-            duration:2000
-          })
+          // wx.showToast({
+          //   title:"上传失败，请检查网络！",
+          //   icon:"none",
+          //   duration:2000
+          // })
         })
         },
 
-}) 
+// bind_word:  function(event){
+//   wx.showLoading({
+//     title:"正在生成Word......",
+//   }).catch(err=>{
+//     wx.showToast({
+//       title:"生成失败！",
+//       icon:"none",
+//       duration:2000
+//     })
+//   })
+//   var that=this
+//   //const _id=wx.getStorageSync('bridgeListID')  
+//   var _id=that.data._id
+//   var that = this
+//   var bridge=that.data.bridge
+//   var fileID
+//   console.log(bridge)
+//           wx.cloud.callFunction({
+//              name:'wordGen',
+//              data: bridge ,
+//             success:function(res){
+//               console.log(res)
+//               console.log(res.result)
+//               fileID=res.result
+//               console.log(fileID)
+//               wx.cloud.downloadFile({
+//                 fileID: fileID
+//               }).then(res => {
+//                 console.log(res)
+//                     wx.openDocument({
+//                       filePath: res.tempFilePath,
+//                       showMenu: true,
+//                       success: function (res) {
+//                         console.log('打开文档成功')
+//                       }
+//                     })
+//                   }).then(res => {
+//                     that.setData({
+//                       'bridge.Cwordid': fileID,
+//                     })   
+//                     bridgeListCollection.doc(_id).update(
+//                       {
+//                         data:{ 
+//                           Cwordid:fileID
+//                         }
+//                       })
+                      
+//                       })
+//                       wx.hideLoading()
+//                       wx.showToast({
+//                         title:"Word生成成功！",
+//                         duration:2000
+//                       }).catch(err=>{
+//                       wx.showToast({
+//                         title:"Word生成失败，请检查网络！",
+//                         icon:"none",
+//                         duration:2000
+//                       })
+//                     })
+//                 },   
+               
+//                 fail: console.error
+//               })
+    
+//     },
+
+//   bind_record: function (e){
+//     wx.showLoading({
+//       title:"正在生成桥梁二维码......",
+//     }).catch(err=>{
+//       wx.showToast({    
+//         title:"生成失败！",
+//         icon:"none",
+//         duration:2000
+//       })
+//     })
+//     var that=this
+//     console.log('do?')
+// var _id=that.data._id
+//   console.log(_id)
+//   var that = this
+//   var bridge=that.data.bridge
+//   var fileID
+//   console.log('do?')
+//   wx.cloud.callFunction({
+//     name: 'qrCode',
+//     data:{
+//       page: 'pages/Qrcode/Qrcode',
+//       scene: _id,
+//       qlmc: bridge.qlmc
+//     },
+//     success:function(res){
+//       fileID=res.result
+//       console.log(fileID)
+//       wx.cloud.downloadFile({
+//         fileID: fileID
+//       }).then(res => {
+//           wx.previewImage({
+//             urls: [res.tempFilePath]
+//           })
+//       }).then(res => {
+//         that.setData({
+//           'bridge.Cqrcode': fileID,
+//         })   
+//         bridgeListCollection.doc(_id).update(
+//           {
+//             data:{ 
+//               Cqrcode:fileID
+//             }
+//           })  
+//           wx.hideLoading()
+//           wx.showToast({
+//             title:"二维码生成成功！",
+//             duration:2000
+//           }).catch(err=>{
+//           wx.showToast({
+//             title:"二维码生成失败，请检查网络！",
+//             icon:"none",
+//             duration:2000
+//           })
+//         })
+//           })
+//     }
+//   }).then(res=>{
+//     console.log('成功',res)
+
+//   }).catch(res=>{
+//     console.log('失败',res)
+//   })
+// }
+})
 
 

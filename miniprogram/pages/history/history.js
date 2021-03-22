@@ -1,7 +1,5 @@
 // pages/history/history.js
-var qlbh
 var app = getApp();
-
 var bridgeList
   // 初始化 cloud
 wx.cloud.init();
@@ -24,25 +22,18 @@ db.collection('bridgeList').get({
 const bridgeListCollection=db.collection('bridgeList')
 Page({
 
-
-
-
 bind_touch:function(e){
-   wx.setStorageSync('bridgeListTime',e.currentTarget.dataset.time);
    wx.setStorageSync('bridgeListID',e.currentTarget.dataset.id);
-  wx.setStorageSync('qlbh',e.target.dataset.index);
-  console.log(qlbh)
-  console.log(e.target.dataset.index)
-  console.log(e.currentTarget.dataset.id)
-  const id=wx.getStorageSync('bridgeListID')
   {
-   
     app.globalData.reveal_lscx=1;
-  wx.redirectTo({
-    url: '../lscx/lscx',
+  wx.navigateTo({
+    url: '../record/record',
     success: (result) => {
-     
-      console.log(bridgeList[qlbh])
+     wx.redirectTo({
+      url: '../record/record',
+       
+     })
+     console.log("clear")
     },
     fail: () => { },
     complete: () => { }
@@ -54,52 +45,59 @@ bind_touch:function(e){
 }
 },
 
-
   bind_clear:function(){
-    var that=this
+    console.log("hello")
+    // var that=this
+    // wx.showModal({
+    //   title: '请确认清空记录',
+    //   content: '是否要清空记录？',
+    //   success(res) {
 
-    wx.showModal({
-      title: '请确认清空记录',
-      content: '是否要清空记录？',
-      success(res) {
-
-        if (res.confirm) {
-          console.log('clear confirm')
-          try{
-            wx.clearStorageSync()
-            that.setData({
-              bridgeList:wx.getStorageSync("bridgeList")||[]
-            })
-            // console.log('success')
-          }catch(e){
-            console.log(e)
-          }
-        } else if (res.cancel) {
-          console.log('clear cancel')
-        }
-      }
-    })
+    //     if (res.confirm) {
+    //       console.log('clear confirm')
+    //       try{
+    //         wx.clearStorageSync()
+    //         that.setData({
+    //           bridgeList:wx.getStorageSync("bridgeList")||[]
+    //         })
+    //       }catch(e){
+    //         console.log(e)
+    //       }
+    //     } else if (res.cancel) {
+    //       console.log('clear cancel')
+    //     }
+    //   }
+    // })
 
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    bridgeListCollection.count().then(res=>{
+  //   bridgeListCollection.count().then(res=>{
       
-      console.log(res)
-    }
-  )
+  //     console.log(res)
+  //   }
+  // )
 
-    bridgeListCollection.get().then(res=>{
-      console.log(res);
-      this.setData({
-        bridgeListData: res.data,
-      })
-    })
-    this.setData({
-      bridgeList:wx.getStorageSync("bridgeList")||[],
-    })
+  //   bridgeListCollection.get().then(res=>{
+  //     console.log(res);
+  //     this.setData({
+  //       bridgeListData: res.data,
+  //     })
+  //   })
+  //   this.setData({
+  //     bridgeList:wx.getStorageSync("bridgeList")||[],
+  //   })
+     wx.cloud.callFunction({
+       name:'getBridgeList',
+       complete:res => {
+         console.log(res)
+         this.setData({
+           bridgeListData: res.result.data
+         })
+       }
+     })
   },
  
   bind_qljc: function() {
@@ -109,6 +107,7 @@ bind_touch:function(e){
       url: '../qljc/qljc',
       success: (result)=>{
         app.globalData.count=0
+        app.globalData.backMain=0
       },
       fail: ()=>{},
       complete: ()=>{}

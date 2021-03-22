@@ -73,16 +73,31 @@ bindconfirm="confirm_kyhl">
 </modal>
 </view>
       <view class="divLine"></view>
-
+<!-- <view> -->
  <view class="tte"  >经纬度:</view>
 
   <view class="content">
   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >经</text>
-   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >度:{{bridge.long}}</text>
+   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >度:{{long}}</text>
    <view>　</view>
    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 纬</text> 
-    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 度:{{bridge.lat}}  </text>
+    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 度:{{lat}}  </text>
    <view style="float:left" bindtap="g_map" class="delete {{editTrue?'isRuleShow':'isRuleHide'}}" >　重新获取 </view>
+   <!-- <view class="content" bindtap="g_map">
+
+<view wx:if="{{editTrue}}">
+  <view  class="button_center">重新获取</view> 
+</view>
+
+<view wx:else>
+<view class="lAL">
+<text  style="float:left"  class="left_long">经度:　{{long}}</text>
+<text    class="right_lat">纬度:　{{lat}}</text> 
+</view>
+</view>
+
+
+</view> -->
 
    </view>
  
@@ -329,11 +344,10 @@ bindconfirm="confirm_dbcd">
   </picker>
 </view>
 <view class="divLine"></view>
- <button  type="primary" bindtap="bind_amd" style="float:left" >提交</button>        
- <button  type="primary" bindtap="bind_history">返回查询</button>
-  <button  type="primary" form-type="reset" style="float:left" bindtap="bind_rst">重置</button>
- <button  type="primary" bindtap="bind_record">返回记录</button>
-
-<button  type="primary" style="float:left"  bindtap="bind_excel">输出为WORD</button> 
-<button  type="primary" bindtap="bind_delete">删除该条记录</button> 
+ <button  class="buttonUnder"  bindtap="bind_amd" style="float:left" >提交修改</button>        
+ <button  class="buttonUnder"   style="float:left" bindtap="bind_history">返回历史记录</button>
+  <!-- <button  class="buttonUnder"  form-type="reset" style="float:left" bindtap="bind_record">生成桥梁二维码</button> -->
+ <button class="buttonUnder"   style="float:left"  bindtap="bind_qljc">返回桥梁记录</button>
+<!-- <button  class="buttonUnder"  style="float:left"  bindtap="bind_word">输出为WORD</button>  -->
+<button  class="buttonUnder"  style="float:left" bindtap="bind_delete">删除该条记录</button> 
 </form>

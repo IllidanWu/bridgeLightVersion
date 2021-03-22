@@ -37,8 +37,14 @@
 
 <view>
   <text  class="tte" for="qlmc">桥梁名称: </text>
+  <!-- <view wx:if="{{isActive_qlmc}}"> 
   <input class="content" name="qlmc" 
-   placeholder='{{bridgeInfo.qlmc}}'   bindinput='bind_qlmc'/> 
+   placeholder="请输入桥梁名称"  bindinput='bind_qlmc'/> 
+   </view> -->
+    <!-- <input class="content" name="qlmc" 
+   placeholder='{{bridgeInfo.qlmc}}'   bindinput='bind_qlmc'/>  -->
+   <input class="content" name="qlmc" 
+   placeholder='{{bridgeReveal.qlmc}}'   bindinput='bind_qlmc'/> 
 </view>
 
 
@@ -47,37 +53,51 @@
 <view>
 
   <text  class="tte" for="szlm" >所在路名: </text>
-
-
   <input class="content" name="szlm"
-   placeholder='{{bridgeInfo.szlm}}' bindinput="bind_szlm" />
-
-  
-
+   placeholder='{{bridgeReveal.szlm}}' bindinput="bind_szlm" />
 </view>
 <view class="divLine"></view>
 <view>
   
   <text  class="tte" for="kyhl" >跨越（河流）: </text>
-  <input class="content" name="kyhl"
-   placeholder='{{bridgeInfo.kyhl}}' bindinput="bind_kyhl" />
+  <!-- <input class="content" name="kyhl"
+   placeholder='{{bridgeInfo.kyhl}}' bindinput="bind_kyhl" /> -->
+   <input class="content" name="kyhl"
+   placeholder='{{bridgeReveal.kyhl}}' bindinput="bind_kyhl" />
   
 </view>
 
  <view class="divLine"></view>
 
 <view>
- <view class="tte"  >经纬度:</view>
-  
-  <view class="content">
-  <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >经</text>
-   <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >度:{{bridgeInfo.long}}</text>
-   <view style="float:left" bindtap="map"  class="delete {{editTrue?'isRuleShow':'isRuleHide'}}">　获取经纬度</view>
-   
-   <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 纬</text> 
-    <text   style="float:left"  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}"> 度:{{bridgeInfo.lat}} </text>
 
-   </view>
+ <view class="tte"  >经纬度:</view>
+  <!-- 最好不要动这一段代码，除非需要重写 -->
+  <!-- <view class="content" bindtap="map">
+  <text  style="float:left"   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}" >经度:　</text>
+   <text  style="float:left "   class="delete {{editTrue?'isRuleHide':'isRuleShow'}}">{{long}}</text>
+    <view  style="float:left"   class="delete {{editTrue?'isRuleShow':'isRuleHide'}}">　　　获取经纬度</view> 
+   <text   style="position:fixed "  class="delete {{editTrue?'isRuleHide':'isRuleShow'}}">纬度:　</text> 
+    <text    class="delete {{editTrue?'isRuleHide':'isRuleShow'}}">　　　{{lat}} </text> -->
+
+    <view class="content" bindtap="map">
+
+      <view wx:if="{{editTrue}}">
+        <view  class="button_center">获取经纬度</view> 
+    </view>
+
+    <view wx:else>
+      <view class="lAL">
+      <text  style="float:left"  class="left_long">经度:　{{long}}</text>
+   <!-- <text  style="float:left "  >{{long}}</text> -->
+   <text    class="right_lat">纬度:　{{lat}}</text> 
+    <!-- <text >　　　{{lat}} </text> -->
+</view>
+
+    </view>
+
+
+</view>
   </view>
 
 <view class="divLine"></view>
@@ -112,36 +132,70 @@
   <view class="divLine"></view>
     <view  class="button_bottom1"  bindtap="bind_qtnr" style=" background-color:rgb(9, 96, 230)"  >其他内容</view  >    
     <view class="divLine"></view>
+    <view>
 
-<view class="divLine"></view>
-<view>
-  <picker bindchange="bind_hqxjcfx" value="{{index_hqxjcfx}}" range="{{arr_hqxjcfx}}">
-    <view >
-    <text class="tte" >横桥向检测方向：</text>
- 
-    <view class="content">{{bridgeInfo.hqxjcfx}} </view>
-    </view>
-  </picker>
+<text class="tte" >横桥向检测方向：</text>
+<view wx:if="{{bridgeActive.hqxjcfx}}">
+<view >
+<picker bindchange="bind_hqxjcfx" value="{{index_hqxjcfx}}" range="{{arr_hqxjcfx}}">
+<view class="content">{{bridgeReveal.hqxjcfx}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_hqxjcfx" value="{{index_hqxjcfx}}" range="{{arr_hqxjcfx}}">
+<view class="content">{{bridgeInfo.hqxjcfx}}</view>
+</picker>
+</view>
+</view>
 </view>
 <view class="divLine"></view>
-<view>
+<!-- <view>
   <picker bindchange="bind_sqxjcfx" value="{{index_sqxjcfx}}" range="{{arr_sqxjcfx}}">
     <view >
      <text class="tte" >顺桥向检测方向：</text>
-     <view class="content">{{bridgeInfo.sqxjcfx}}</view>
+     <view class="content">{{bridgeReveal.sqxjcfx}}</view>
      </view>
   </picker>
+</view> -->
+<view>
+
+<text class="tte" >顺桥向检测方向：</text>
+<view wx:if="{{bridgeActive.sqxjcfx}}">
+<view >
+<picker bindchange="bind_sqxjcfx" value="{{index_sqxjcfx}}" range="{{arr_sqxjcfx}}">
+<view class="content">{{bridgeReveal.sqxjcfx}}</view>
+</picker>
+</view>
+</view>
+<view wx:else>
+ <view >
+<picker bindchange="bind_sqxjcfx" value="{{index_sqxjcfx}}" range="{{arr_sqxjcfx}}">
+<view class="content">{{bridgeInfo.sqxjcfx}}</view>
+</picker>
+</view>
+</view>
 </view>
 
 
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_qmjg" value="{{index_qmjg}}" range="{{arr_qmjg}}">
+  <text class="tte" >桥面结构:</text>
+  <view wx:if="{{bridgeActive.qmjg}}">
     <view >
-    <text class="tte" >桥面结构:</text>
-    <view class="content">{{bridgeInfo.qmjg}}</view>
-    </view>
+      <picker bindchange="bind_qmjg" value="{{index_qmjg}}" range="{{arr_qmjg}}">
+    <view class="content">{{bridgeReveal.qmjg}}</view>
   </picker>
+    </view>
+    </view>
+    <view wx:else>
+      <view >
+      <picker bindchange="bind_qmjg" value="{{index_qmjg}}" range="{{arr_qmjg}}">
+    <view class="content">{{bridgeInfo.qmjg}}</view>
+  </picker>
+    </view>
+    </view>
 </view>
 
 
@@ -151,79 +205,131 @@
 <view>
   <label   class="tte">请输入横向布置: </label>
   <input class="content" name="hxbz"
-   placeholder='{{bridgeInfo.hxbz}}'  bindinput="bind_hxbz"/>
+   placeholder='{{bridgeReveal.hxbz}}'  bindinput="bind_hxbz"/>
 </view>
 <view class="divLine"></view>
 <view>
   <label  class="tte">请输入栏杆尺寸: </label>
   <input class="content" name="lgcc"
-   placeholder='{{bridgeInfo.lgcc}}' bindinput="bind_lgcc"/>
+   placeholder='{{bridgeReveal.lgcc}}' bindinput="bind_lgcc"/>
 </view>
 <view class="divLine"></view>
 <view>
   <label  class="tte">请输入路沿石高度: </label>
   <input class="content" name="lysgd"
-   placeholder='{{bridgeInfo.lysgd}}' bindinput="bind_lysgd"/>
+   placeholder='{{bridgeReveal.lysgd}}' bindinput="bind_lysgd"/>
 </view>
 <view class="divLine"></view>
 <view>
   <label  class="tte" >请输入排水口类型尺寸和个数: </label>
   <input class="content" name="psg"
-   placeholder='{{bridgeInfo.psg}}' bindinput="bind_psg" />
+   placeholder='{{bridgeReveal.psg}}' bindinput="bind_psg" />
 </view>
 <view class="divLine"></view>
 <view>
   <label  class="tte">请输入搭板长度: </label>
   <input class="content" name="dbcd"
-   placeholder='{{bridgeInfo.dbcd}}' bindinput="bind_dbcd" />
+   placeholder='{{bridgeReveal.dbcd}}' bindinput="bind_dbcd" />
    </view>
 
 
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_jltx" value="{{index_jltx}}" range="{{arr_jltx}}">
+  <text class="tte">静力体系:</text>
+  <view wx:if="{{bridgeActive.jltx}}">
     <view >
-     <text class="tte">静力体系:</text>
+      <picker bindchange="bind_jltx" value="{{index_jltx}}" range="{{arr_jltx}}">
+
+     <view class="content">{{bridgeReveal.jltx}}</view>
+    </picker>
+     </view>
+     </view>
+     <view wx:else>
+      <view >
+      <picker bindchange="bind_jltx" value="{{index_jltx}}" range="{{arr_jltx}}">
+
      <view class="content">{{bridgeInfo.jltx}}</view>
+    </picker>
      </view>
-  </picker>
+     </view>
+
 </view>
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_hjmxs" value="{{index_hjmxs}}" range="{{arr_hjmxs}}">
+  <text class="tte">横截面型式:</text>
+  <view wx:if="{{bridgeActive.hjmxs}}">
     <view >
-     <text class="tte">横截面型式:</text>
+      <picker bindchange="bind_hjmxs" value="{{index_hjmxs}}" range="{{arr_hjmxs}}">
+     <view class="content">{{bridgeReveal.hjmxs}}</view>
+    </picker>
+     </view>
+     </view>
+     <view wx:else>
+      <view >
+      <picker bindchange="bind_hjmxs" value="{{index_hjmxs}}" range="{{arr_hjmxs}}">
      <view class="content">{{bridgeInfo.hjmxs}}</view>
+    </picker>
      </view>
-  </picker>
+     </view>
+
 </view>
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_sgff" value="{{index_sgff}}" range="{{arr_sgff}}">
+  <text class="tte">施工方法:</text>
+  <view wx:if="{{bridgeActive.sgff}}">
     <view>
-     <text class="tte">施工方法:</text>
-     <view class="content">{{bridgeInfo.sgff}}</view>
+      <picker bindchange="bind_sgff" value="{{index_sgff}}" range="{{arr_sgff}}">
+     <view class="content">{{bridgeReveal.sgff}}</view>
+    </picker>
      </view>
-  </picker>
+     </view>
+     <view wx:else>
+      <view>
+      <picker bindchange="bind_sgff" value="{{index_sgff}}" range="{{arr_sgff}}">
+     <view class="content">{{bridgeInfo.sgff}}</view>
+    </picker>
+     </view>
+     </view>
+
 </view>
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_hxlx" value="{{index_hxlx}}" range="{{arr_hxlx}}">
+  <text class="tte">横向联系:</text>
+  <view wx:if="{{bridgeActive.hxlx}}">
     <view >
-     <text class="tte">横向联系:</text>
-     <view class="content" >{{bridgeInfo.hxlx}}</view>
+      <picker bindchange="bind_hxlx" value="{{index_hxlx}}" range="{{arr_hxlx}}">
+     <view class="content" >{{bridgeReveal.hxlx}}</view>
+    </picker>
      </view>
-  </picker>
+     </view>
+     <view wx:else>
+      <view >
+      <picker bindchange="bind_hxlx" value="{{index_hxlx}}" range="{{arr_hxlx}}">
+     <view class="content" >{{bridgeInfo.hxlx}}</view>
+    </picker>
+     </view>
+     </view>
+
 </view>
 
 <view class="divLine"></view>
 <view>
-  <picker bindchange="bind_clxs" value="{{clxs}}" range="{{arr_clxs}}">
+  <text class="tte">材料型式:</text>
+  <view wx:if="{{bridgeActive.clxs}}">
     <view>
-     <text class="tte">材料型式:</text>
-     <view class="content">{{bridgeInfo.clxs}}</view>
+      <picker bindchange="bind_clxs" value="{{clxs}}" range="{{arr_clxs}}">
+     <view class="content">{{bridgeReveal.clxs}}</view>
+    </picker>
      </view>
-  </picker>
+ </view>
+ <view wx:else>
+  <view>
+      <picker bindchange="bind_clxs" value="{{clxs}}" range="{{arr_clxs}}">
+     <view class="content">{{bridgeInfo.clxs}}</view>
+    </picker>
+     </view>
+
+ </view>
 </view>
 <view class="divLine"></view>
 

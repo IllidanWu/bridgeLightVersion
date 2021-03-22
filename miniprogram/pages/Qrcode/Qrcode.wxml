@@ -1,0 +1,84 @@
+<view class="user_info_wrap">
+  <view  class="user_img_wrap">
+      <swiper class="swiper_box" autoplay="{{true}}" indicator-dots="{{true}}" circular="{{true}}"  >
+          <swiper-item
+          wx:for="{{swiperList}}"
+          wx:key="key"
+          >
+          <image class="user_bg" src="{{item}}"></image>
+        </swiper-item>
+      </swiper>
+        <view class="user_info">
+            <view class="user_name">{{bridge.qlmc}}</view>
+        </view>
+      </view>
+    </view>  
+ 
+    <view class="user_content">
+    <view class="user_main">
+       <!-- 应用信息相关-->
+       <view class="app_info_wrap">
+        <view class="app_info_item app_info_contact">
+               <text >检测日期</text>
+               <text>{{bridge.jcrq}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >检测时间</text>
+               <text>{{bridge.jcsj}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >检测地区</text>
+               <text>{{bridge.jcdq}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >桥梁名称</text>
+               <text>{{bridge.qlmc}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >所在路名</text>
+               <text>{{bridge.szlm}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >跨越（河流）</text>
+               <text>{{bridge.kyhl}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >经纬度</text>
+               <text>经度:{{long}} 纬度{{lat}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >横桥向检测方向</text>
+               <text>{{bridge.hqxjcfx}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >顺桥向检测方向</text>
+               <text>{{bridge.sqxjcfx}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >桥面结构</text>
+               <text>{{bridge.qmjg}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >横向布置</text>
+               <text>{{bridge.hxbz}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >栏杆尺寸</text>
+               <text>{{bridge.lgcc}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >路沿石高度</text>
+               <text>{{bridge.lysgd}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >排水口类型尺寸和个数</text>
+               <text>{{bridge.psg}}</text>
+           </view>
+           <view class="app_info_item app_info_contact">
+               <text >静力体系</text>
+               <text>{{bridge.jltx}}</text>
+           </view>
+       </view>
+       <!--推荐-->
+    </view>
+</view>

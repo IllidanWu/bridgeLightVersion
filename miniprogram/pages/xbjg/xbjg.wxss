@@ -32,7 +32,7 @@
    border:5rpx solid #eee;
    margin:10rpx;
    height:60rpx;
-   display:flex;
+   /* display:flex; */
    align-items:center;
    border-top-left-radius:5px;
    border-top-right-radius:5px;

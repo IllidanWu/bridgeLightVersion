@@ -9,7 +9,10 @@
     "pages/qtnr/qtnr",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/test/test"
+    "pages/record/record",
+    "pages/Qrcode/Qrcode",
+    "pages/search/search",
+    "pages/bridgeMap/bridgeMap"
 
   ],
   "window": {

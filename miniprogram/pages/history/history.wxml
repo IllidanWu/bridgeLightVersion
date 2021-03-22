@@ -1,4 +1,5 @@
-<view class="title" >
+<SearchInput> </SearchInput>
+  <view class="title" >
 <label> 历史记录</label>
 </view>
 
@@ -7,15 +8,18 @@
 <block wx:for="{{bridgeListData}}" wx:key="key"  >
 <view class="divLine"> </view>
 <view class="main">
-<text class="tteframe" data-index ='{{index}}' data-id="{{item._id}}" data-time="{{item.time}}"  bindtap="bind_touch" >{{index+1}}  {{item.qlmc}} {{item.jcrq}}</text>
-  <image class="imgSty" src="{{item.Czmt}}" style="width: 50px; height: 50px; background-color: #eeeeee;float:right;"></image>
+<!-- <text class="tteframe" data-index ='{{index}}' data-id="{{item._id}}" data-time="{{item.time}}"  bindtap="bind_touch" >{{index+1}}  {{item.qlmc}} {{item.jcrq}}</text>
+  <image class="imgSty" src="{{item.Czmt}}" style="width: 50px; height: 50px; background-color: #eeeeee;float:right;"></image> -->
+  <image class="imgSty" src="{{item.Czmt}}" style="width: 50px; height: 50px; background-color: #eeeeee;float:left;"></image>
+  <text class="tteframe" data-index ='{{index}}' data-id="{{item._id}}"  data-time="{{item.time}}" bindtap="bind_touch" >桥梁名称：{{item.qlmc}} 
+       记录时间：  {{item.jcrq}}</text>
+ 
  </view>
 </block>
-
 </view>
    
 
-    <button class="button_bottom1"  bindtap="bind_clear">　　清空记录 </button>
+    <button class="button_bottom1"  bindtap="bind_clear">功能暂缺</button>
     <view>　</view>
      <button class="button_bottom2"   bindtap="bind_qljc">　返回记录页面</button>
 

@@ -23,15 +23,30 @@
                                font-family:"微软雅黑";
                                font-weight:900;     
                           }
-                          
-          
-                          
+                          .button_center{
+                             padding-top: 8rpx;
+                             align-items: center;
+                            text-align: center;
+                          }
+                          .lAL{
+                            align-items: center;
+                            display: flex;
+                          }
+                          .left_long{
+                           padding-top: 8rpx;
+                              flex: 2;
+                          }
+                          .right_lat{
+                           padding-top: 8rpx;
+                             flex:2;
+                          }
+
                           .content{
                              font-size:medium;width:90%;
                              border:5rpx solid #eee;
                              margin:10rpx;
                              height:60rpx;
-                             display:flex;
+                             /* display:flex; */
                              align-items:center;
                              border-top-left-radius:5px;
                              border-top-right-radius:5px;
